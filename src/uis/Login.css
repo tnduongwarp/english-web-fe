@@ -1,0 +1,12 @@
+.hr-line {
+    display: flex;
+    flex-direction: row;
+}
+
+.hr-line:before,
+.hr-line:after {
+    content: "";
+    flex: 1 1;
+    border-bottom: 0.5px solid grey;
+    margin: auto;
+}
