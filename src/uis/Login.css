@@ -1,12 +1,14 @@
 .hr-line {
     display: flex;
     flex-direction: row;
+    color: lightslategrey;
 }
 
 .hr-line:before,
 .hr-line:after {
     content: "";
     flex: 1 1;
-    border-bottom: 0.5px solid grey;
+    border-bottom: 0.5px solid lightslategrey;
+    ;
     margin: auto;
 }
