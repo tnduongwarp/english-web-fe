@@ -8,6 +8,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Login from './uis/Login';
+import Register from './uis/Register';
+import ForgottenPassword from './uis/ForgottenPassword';
 
 const router = createBrowserRouter([
   {
@@ -15,8 +17,19 @@ const router = createBrowserRouter([
     element: <Navigate to="/login" replace />,
   },
   {
-    path: "login",
+    path: "/login",
+    name: "",
     element: <Login />
+  },
+  {
+    path: "/register",
+    element: <Register />
+  },
+  {
+    path: "/password",
+    children: [
+      {path:"reset", element: <ForgottenPassword />}
+    ]
   }]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
