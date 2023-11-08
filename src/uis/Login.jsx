@@ -1,11 +1,38 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./Login.css"
 import { useNavigate } from "react-router-dom";
-
+import GoogleLogin from "react-google-login";
+import { gapi } from 'gapi-script';
+import ApiRoot from "../services/ApiRoot";
 export default function Login() {
+    const [loginData, setLoginData] = useState(
+        localStorage.getItem('loginData')
+        ? JSON.parse(localStorage.getItem('loginData'))
+        : null
+    );
+    const handleFailure = (result) => {
+       console.log(result)
+    }
+    const handleLogin = async (googleData) => {
+        console.log(googleData.tokenId);
+        const data = {
+            token: googleData.tokenId
+        }
+        const res = await ApiRoot.postRequestBase('/auth/login-with-gg',data);
+        console.log(res)
+        
+    };
     //initState
     useEffect(() => { 
         document.title = "Login"; 
+        function start() {
+            gapi.client.init({
+              clientId: process.env.REACT_APP_GOOGLE_CLIENT_ID,
+              scope: 'email',
+            });
+          }
+      
+          gapi.load('client:auth2', start);
     }, []);
 
     const navigate = useNavigate();
@@ -17,6 +44,7 @@ export default function Login() {
     }
 
     return <div className="d-flex flex-column" style={{ height: "100vh" }}>
+        
         <div className="container-fluid bg-dark text-white p-1">
             <h2>Logo</h2>
         </div>
@@ -25,11 +53,21 @@ export default function Login() {
             <div className="col-3">
                 <h1 className="text-center fs-1 fw-bolder m-5">Login to have fun and learn better!</h1>
                 <div className="row my-4">
-                    <button type="button" className="col-11 mx-auto btn btn-info d-flex justify-content-between" style={{ borderRadius: 30 }}>
-                        <img src="https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA" alt="G" width="25" height="25" className="bg-light rounded-circle p-1" />
-                        <div className="flex-fill">Sign in with Google</div>
-                        <span></span>
-                    </button>
+                    
+                    <GoogleLogin
+                         clientId = {process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                         render={renderprops => (
+                            <button type="button" onClick={renderprops.onClick} className="col-11 mx-auto btn btn-info d-flex justify-content-between" style={{ borderRadius: 30 }}>
+                                <img src="https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA" alt="G" width="25" height="25" className="bg-light rounded-circle p-1" />
+                                <div className="flex-fill">Sign in with Google</div>
+                                <span></span>
+                            </button>
+                          )}
+                         buttonText = "Sign in with Google"
+                         onSuccess = {handleLogin}
+                         onFailure = {handleFailure}
+                         cookiePolicy = {"single_host_origin"}
+                    ></GoogleLogin>
                 </div>
                 <p className="hr-line my-4">or</p>
                 <form action="">
@@ -39,7 +77,7 @@ export default function Login() {
                     </div>
                     <div className="my-4">
                         <label htmlFor="pwd" className="form-label">Password:</label>
-                        <input type="password" className="form-control" id="pwd" placeholder="Your password go here!" name="pswd" />
+                        <input type="password" autoComplete="off" className="form-control" id="pwd" placeholder="Your password go here!" name="pswd" />
                     </div>
                     <div className="form-check my-4 d-flex justify-content-between align-items-center">
                         <label className="form-check-label">
