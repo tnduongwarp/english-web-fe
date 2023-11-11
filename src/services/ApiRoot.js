@@ -1,5 +1,5 @@
 export default class ApiRoot {
-    static baseUrl = "https://jsonplaceholder.typicode.com";
+    static baseUrl = "http://localhost:3000";
 
     static async getRequestBase(url, query = undefined) {
         url = this.baseUrl + url;
@@ -9,7 +9,7 @@ export default class ApiRoot {
         return await fetch(url, {
             method: "GET"
         })
-        .then((response) => response.json())
+        .then(async (response) => await response.json())
         .then((data) => data)
         .catch((err) => err);
     }
@@ -21,9 +21,9 @@ export default class ApiRoot {
                 "Content-Type": "application/json"
             },
             method: "POST",
-            data: JSON.stringify(data)
+            body: JSON.stringify(data)
         })
-        .then((response) => response.json())
+        .then( async (response) =>  await response.json())
         .then((data) => data)
         .catch((err) => err);
     }
@@ -38,9 +38,9 @@ export default class ApiRoot {
                 "Content-Type": "application/json"
             },
             method: "PUT",
-            data: JSON.stringify(data | {})
+            body: JSON.stringify(data | {})
         })
-        .then((response) => response.json())
+        .then( async (response) => await response.json())
         .then((data) => data)
         .catch((err) => err);
     }
@@ -53,7 +53,7 @@ export default class ApiRoot {
         return await fetch(url, {
             method: "DELETE"
         })
-        .then((response) => response.json())
+        .then(async (response) => await response.json())
         .then((data) => data)
         .catch((err) => err);
     }
