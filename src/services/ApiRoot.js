@@ -1,60 +1,58 @@
 export default class ApiRoot {
-    static baseUrl = "http://localhost:3000";
+    baseUrl = "http://localhost:3000";
 
-    static async getRequestBase(url, query = undefined) {
+    async getRequestBase(url, query = undefined) {
         url = this.baseUrl + url;
         if(query !== undefined && query !== null) {
             url = url + new URLSearchParams(query);
         }
-        return await fetch(url, {
-            method: "GET"
+        return fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
         })
-        .then(async (response) => await response.json())
-        .then((data) => data)
-        .catch((err) => err);
+        .then((response) => response.json()).catch(err => console.log(err));
     }
 
-    static async postRequestBase(url, data) {
+    async postRequestBase(url, data) {
         url = this.baseUrl + url;
-        return await fetch(url, {
+        return fetch(url, {
+            method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            method: "POST",
             body: JSON.stringify(data)
         })
-        .then( async (response) =>  await response.json())
-        .then((data) => data)
-        .catch((err) => err);
+        .then((response) => response.json()).catch(err => console.log(err));
     }
 
-    static async putRequestBase(url, data, query = undefined) {
+    async putRequestBase(url, data, query = undefined) {
         url = this.baseUrl + url;
         if(query !== undefined && query !== null) {
             url = url + new URLSearchParams(query);
         }
-        return await fetch(url, {
+        return fetch(url, {
             headers: {
                 "Content-Type": "application/json"
             },
             method: "PUT",
             body: JSON.stringify(data | {})
         })
-        .then( async (response) => await response.json())
-        .then((data) => data)
-        .catch((err) => err);
+        .then((response) => response.json()).catch(err => console.log(err));
     }
 
-    static async deleteRequestBase(url, query = undefined) {
+    async deleteRequestBase(url, query = undefined) {
         url = this.baseUrl + url;
         if(query !== undefined && query !== null) {
             url = url + new URLSearchParams(query);
         }
-        return await fetch(url, {
-            method: "DELETE"
+        return fetch(url, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
         })
-        .then(async (response) => await response.json())
-        .then((data) => data)
-        .catch((err) => err);
+        .then((response) => response.json()).catch(err => console.log(err));
     }
 }
