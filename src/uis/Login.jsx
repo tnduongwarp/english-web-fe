@@ -40,7 +40,7 @@ export default function Login() {
         navigate("/register");
     }
     const onForgottenPasswordClick = () => {
-        navigate("/password/reset");
+        navigate("/password");
     }
 
     return <div className="d-flex flex-column" style={{ height: "100vh" }}>

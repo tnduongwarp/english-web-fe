@@ -9,8 +9,7 @@ import {
 } from "react-router-dom";
 import Login from './uis/Login';
 import Register from './uis/Register';
-import ForgottenPassword from './uis/ForgottenPassword';
-
+import ResetPassWord from './uis/forgot-password';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -27,9 +26,8 @@ const router = createBrowserRouter([
   },
   {
     path: "/password",
-    children: [
-      {path:"reset", element: <ForgottenPassword />}
-    ]
+    element: <ResetPassWord></ResetPassWord>
+    
   }]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
