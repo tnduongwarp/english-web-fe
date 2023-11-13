@@ -18,7 +18,8 @@ export default function ForgottenPassword() {
           ApiRoot.postRequestBase('/forgot-pw/send_recovery_email',data)
           .then((res) => {
             console.log(res)
-            if(!res.error){
+            if(res.error === false){
+                console.log(res.error)
                 setIsLoading(false);
                 setOTP(OTP);
                 setEmail(emailInput);
@@ -46,7 +47,7 @@ export default function ForgottenPassword() {
         navigate("/login");
     }
 
-    return <div className="d-flex flex-column" style={{ height: "100vh" }}>
+    return <div className="d-flex flex-column" style={{ height: "100vh", overflowX: "hidden" }}>
             <div className="container-fluid bg-dark text-white p-2 d-flex justify-content-around">
                 <h2>Logo</h2>
                 <div className="d-inline-flex">

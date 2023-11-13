@@ -75,7 +75,7 @@ export default function ChangePassword() {
         navigate("/login");
     }
 
-    return <div className="d-flex flex-column" style={{ height: "100vh" }}>
+    return <div className="d-flex flex-column" style={{ height: "100vh", overflowX: "hidden" }}>
             <div className="container-fluid bg-dark text-white p-2 d-flex justify-content-around">
                 <h2>Logo</h2>
                 <div className="d-inline-flex">

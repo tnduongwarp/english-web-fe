@@ -43,7 +43,7 @@ export default function Login() {
         navigate("/password");
     }
 
-    return <div className="d-flex flex-column" style={{ height: "100vh" }}>
+    return <div className="d-flex flex-column" style={{ height: "100vh", overflowX: "hidden" }}>
         
         <div className="container-fluid bg-dark text-white p-1">
             <h2>Logo</h2>
