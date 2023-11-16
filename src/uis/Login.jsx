@@ -12,7 +12,7 @@ export default function Login() {
             : null
     );
     const handleFailure = (result) => {
-        console.log(result)
+        console.log(result);
     }
     const handleGGLogin = async (googleData) => {
         console.log(googleData.tokenId);
