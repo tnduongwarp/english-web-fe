@@ -15,7 +15,7 @@ export default function Login() {
         console.log(result);
     }
     const handleGGLogin = async (googleData) => {
-        console.log(googleData.tokenId);
+        console.log(googleData.tokenId)
         const data = {
             token: googleData.tokenId
         }
