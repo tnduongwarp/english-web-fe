@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Api from "../services/Api";
-
+import AuthApi from "../services/auth-api";
+import Api from '../services/Api'
 export default function Dashboard() {
     const navigate = useNavigate();
 
@@ -14,8 +14,11 @@ export default function Dashboard() {
             || token["expired-at"] === undefined) navigate("/login");
     }, [navigate]);
 
+    useEffect(() => {
+        Api.getAllCategory().then( res => console.log(res.data))
+    })
     const handleLogout = async () => {
-        await new Api().logout();
+        await new AuthApi().logout();
         localStorage.removeItem("token");
         navigate("/login");
     }

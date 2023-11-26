@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Api from "../services/Api";
+import Api from "../services/auth-api";
 
 export default function Register() {
     const [registerData, setRegisterData] = useState(null);
