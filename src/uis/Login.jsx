@@ -3,7 +3,7 @@ import "./Login.css"
 import { Link, useNavigate } from "react-router-dom";
 import GoogleLogin from "react-google-login";
 import { gapi } from 'gapi-script';
-import Api from "../services/Api";
+import Api from "../services/auth-api";
 
 export default function Login() {
     const [loginData, setLoginData] = useState(
