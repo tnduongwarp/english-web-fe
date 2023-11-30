@@ -20,8 +20,17 @@ export default function Login() {
         const data = {
             token: googleData.tokenId
         }
-        const res = await Api().loginWithGG(data);
-        console.log(res)
+        const res = await new Api().loginWithGG(data);
+        if(res["error"] === false) {
+            localStorage["token"] = JSON.stringify( {
+                "access-token": res["accessToken"],
+                "refresh-token": res["refreshToken"],
+                "expired-at": 0
+            })
+            navigate("/category");
+        }else{
+            setHasErr(true)
+        }
     };
 
     const navigate = useNavigate();
@@ -64,7 +73,7 @@ export default function Login() {
                     "refresh-token": res["refreshToken"],
                     "expired-at": 0
                 })
-                navigate("/dashboard");
+                navigate("/category");
             }else{
                 setHasErr(true)
             }
