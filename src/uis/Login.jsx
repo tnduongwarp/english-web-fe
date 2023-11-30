@@ -41,7 +41,7 @@ export default function Login() {
             if (token["access-token"] !== undefined
                 && token["refresh-token"] !== undefined
                 && token["expired-at"] !== undefined)
-                navigate("/dashboard");
+                navigate("/category");
         }
     }, [navigate]);
 
@@ -133,6 +133,6 @@ export default function Login() {
             <div className="col"></div>
         </div>
         <div className="flex-fill"></div>
-        <Footer></Footer>
+        <Footer />
     </div>;
 }

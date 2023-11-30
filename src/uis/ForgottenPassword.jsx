@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import Footer from "./Footer";
 
 export default function ForgottenPassword() {
     //initState
@@ -36,8 +37,6 @@ export default function ForgottenPassword() {
             <div className="col"></div>
         </div>
         <div className="flex-fill"></div>
-        <footer className="container-fluid bg-dark text-white mt-auto p-2">
-            <p>"It's never too late to start a new adventure!" - Unknown</p>
-        </footer>
+        <Footer />
     </div>;
 }
