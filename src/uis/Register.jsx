@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Api from "../services/auth-api";
+import Footer from "./Footer";
+import {  notification } from 'antd';
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+    const navigate = useNavigate();
     const [registerData, setRegisterData] = useState(null);
-
+    const [api, contextHolder] = notification.useNotification();
     //initState
     useEffect(() => {
         document.title = "Register";
@@ -17,6 +21,17 @@ export default function Register() {
         }
         await new Api().signUp(registerData["username"], registerData["password"], registerData["email"]).then(res => {
             console.log(res)
+            if(res.error === false){
+                api['success']({
+                    message: 'Success',
+                    description:
+                      'You have sign up successfully!',
+                      duration:3
+                  });
+                setTimeout(() => {
+                    navigate('/login')
+                },3500)
+            }
         }).catch(err => console.log(err));
     }
 
@@ -24,7 +39,10 @@ export default function Register() {
         setRegisterData({ ...registerData, [e.target.name]: e.target.value });
     }
 
-    return <div className="d-flex flex-column" style={{ height: "100vh" }}>
+    return (
+        <>
+        {contextHolder}
+        <div className="d-flex flex-column" style={{ height: "100vh" }}>
         <div className="container-fluid bg-dark text-white p-2 d-flex justify-content-between">
             <h2>Logo</h2>
             <Link to="/login" className="btn btn-info mx-5 px-4" style={{fontWeight: "bolder", fontSize: "1.2rem"}}>Log in</Link>
@@ -61,8 +79,9 @@ export default function Register() {
             <div className="col-1"></div>
         </div>
         <div className="flex-fill"></div>
-        <footer className="container-fluid bg-dark text-white mt-auto p-2">
-            <p>"It's never too late to start a new adventure!" - Unknown</p>
-        </footer>
+       <Footer></Footer>
     </div>
+        </>
+    )
+    
 }
