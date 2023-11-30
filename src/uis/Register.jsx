@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Api from "../services/auth-api";
+import { Modal } from "bootstrap";
+import Footer from "./Footer";
 
 export default function Register() {
     const [registerData, setRegisterData] = useState(null);
@@ -16,8 +18,13 @@ export default function Register() {
             return;
         }
         await new Api().signUp(registerData["username"], registerData["password"], registerData["email"]).then(res => {
-            console.log(res)
-        }).catch(err => console.log(err));
+            console.log(res);
+            document.querySelector("#modal-title").textContent = (res["error"] === true)?`Error`:`Info`;
+            document.querySelector("#modal-body").textContent = `${res["message"]}`;
+            new Modal(document.querySelector("#modal"), {}).show();
+        }).catch(err => {
+            
+        });
     }
 
     const handleChange = (e) => {
@@ -27,7 +34,7 @@ export default function Register() {
     return <div className="d-flex flex-column" style={{ height: "100vh" }}>
         <div className="container-fluid bg-dark text-white p-2 d-flex justify-content-between">
             <h2>Logo</h2>
-            <Link to="/login" className="btn btn-info mx-5 px-4" style={{fontWeight: "bolder", fontSize: "1.2rem"}}>Log in</Link>
+            <Link to="/login" className="btn btn-info mx-5 px-4" style={{ fontWeight: "bolder", fontSize: "1.2rem" }}>Log in</Link>
         </div>
         <div className="row">
             <div className="col"></div>
@@ -36,15 +43,15 @@ export default function Register() {
                 <form action="">
                     <div className="my-4">
                         <label htmlFor="email" className="form-label">Email:</label>
-                        <input type="email" className="form-control" placeholder="Your email go here!" name="email" onChange={handleChange}/>
+                        <input type="email" className="form-control" placeholder="Your email go here!" name="email" onChange={handleChange} />
                     </div>
                     <div className="my-4">
                         <label htmlFor="username" className="form-label">Username:</label>
-                        <input type="text" className="form-control" placeholder="Your username go here!" name="username" onChange={handleChange}/>
+                        <input type="text" className="form-control" placeholder="Your username go here!" name="username" onChange={handleChange} />
                     </div>
                     <div className="my-4">
                         <label htmlFor="password" className="form-label">Password:</label>
-                        <input type="password" className="form-control" placeholder="Your password go here!" name="password" onChange={handleChange}/>
+                        <input type="password" className="form-control" placeholder="Your password go here!" name="password" onChange={handleChange} />
                     </div>
                     <div className="my-4">
                         Make sure your password
@@ -60,9 +67,24 @@ export default function Register() {
             </div>
             <div className="col-1"></div>
         </div>
+        <div id="modal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 id="modal-title" class="modal-title"> </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div id="modal-body" class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div className="flex-fill"></div>
-        <footer className="container-fluid bg-dark text-white mt-auto p-2">
-            <p>"It's never too late to start a new adventure!" - Unknown</p>
-        </footer>
+        <Footer />
     </div>
 }

@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import GoogleLogin from "react-google-login";
 import { gapi } from 'gapi-script';
 import Api from "../services/auth-api";
+import Footer from "./Footer";
 
 export default function Login() {
     const [loginData, setLoginData] = useState(
@@ -40,7 +41,7 @@ export default function Login() {
             if (token["access-token"] !== undefined
                 && token["refresh-token"] !== undefined
                 && token["expired-at"] !== undefined)
-                navigate("/dashboard");
+                navigate("/category");
         }
     }, [navigate]);
 
@@ -62,7 +63,7 @@ export default function Login() {
                     "refresh-token": res["refreshToken"],
                     "expired-at": 0
                 })
-                navigate("/dashboard");
+                navigate("/category");
             }
         }).catch(err => console.log(err));
     }
@@ -127,8 +128,6 @@ export default function Login() {
             <div className="col"></div>
         </div>
         <div className="flex-fill"></div>
-        <footer className="container-fluid bg-dark text-white mt-auto p-2">
-            <p>"It's never too late to start a new adventure!" - Unknown</p>
-        </footer>
+        <Footer />
     </div>;
 }
