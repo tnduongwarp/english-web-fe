@@ -7,7 +7,7 @@ import {
   RouterProvider,
   Navigate
 } from "react-router-dom";
-import Login from './uis/Login';
+import Login from './uis/Login/Login';
 import Register from './uis/Register';
 import ForgottenPassword from './uis/ForgottenPassword';
 import Dashboard from './uis/Dashboard';
@@ -18,7 +18,7 @@ const router = createBrowserRouter(
   [
     { path: "/login", element: <Login />, index: true },
     { path: "/register", element: <Register /> },
-    { path: "/dashboard", element: <Dashboard /> },
+    { path: "/dashboard/*", element: <Dashboard /> },
     { path: "/vocabulary", element: <VocabularyLesson /> },
     { path: "quiz/:id", element: <Quiz/>},
     {
@@ -28,6 +28,7 @@ const router = createBrowserRouter(
       ]
     },
     { path: "/category", element: <Category /> },
+    
     { path:"*", element: <Navigate to="/login" />}
     
   ]);

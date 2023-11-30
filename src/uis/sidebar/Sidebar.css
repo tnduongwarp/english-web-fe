@@ -27,4 +27,8 @@
     border-color: #E3E3E3;
     ;
     cursor: pointer;
+    text-decoration: none;
 }
+#sidebar-element.active {
+    background-color: #e8e8e8; 
+  }

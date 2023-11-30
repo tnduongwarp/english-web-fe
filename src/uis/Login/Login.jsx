@@ -3,8 +3,8 @@ import "./Login.css"
 import { Link, useNavigate } from "react-router-dom";
 import GoogleLogin from "react-google-login";
 import { gapi } from 'gapi-script';
-import Api from "../services/auth-api";
-import Footer from "./Footer";
+import Api from "../../services/auth-api";
+import Footer from "../Footer";
 export default function Login() {
     const [hasErr,setHasErr] = useState(false);
     const [loginData, setLoginData] = useState(
@@ -26,7 +26,8 @@ export default function Login() {
                 "access-token": res["accessToken"],
                 "refresh-token": res["refreshToken"],
                 "expired-at": 0
-            })
+            });
+            localStorage['userId'] = JSON.stringify(res.user.id)
             navigate("/category");
         }else{
             setHasErr(true)

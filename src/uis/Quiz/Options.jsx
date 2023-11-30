@@ -2,7 +2,7 @@ import React from "react";
 const Options = ({options, selectedOption, onOptionChange}) => {
     console.log(options)
     return (
-        <div className='options'>
+        <div>
             {options.map((option, index) => (
                 <div key={index} className="form-check">
                     <input

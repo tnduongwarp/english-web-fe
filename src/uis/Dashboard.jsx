@@ -2,6 +2,12 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
+import Sidebar from './sidebar/Sidebar';
+import Video from "./video/Video";
+import Quiz from './Quiz/Quiz';
+
+import {  Route, Routes } from "react-router-dom";
+
 export default function Dashboard() {
     const navigate = useNavigate();
 
@@ -16,10 +22,18 @@ export default function Dashboard() {
 
     
 
-    return <div className="d-flex flex-column" style={{ height: "100vh" }}>
+    return <div className="d-flex flex-column" style={{ height: "100vh", }}>
         <Header />
-        <div className="row"></div>
-        <div className="flex-fill"></div>
+        <div className="row">
+            <Sidebar/>
+            
+                <Routes>
+                        <Route path="/video" element={<Video/>} />
+                        <Route path="/quiz" element={<Quiz/>} />
+                </Routes>
+           
+            
+        </div>
         <Footer />
     </div>
 }
