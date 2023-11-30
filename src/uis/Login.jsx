@@ -5,8 +5,8 @@ import GoogleLogin from "react-google-login";
 import { gapi } from 'gapi-script';
 import Api from "../services/auth-api";
 import Footer from "./Footer";
-
 export default function Login() {
+    const [hasErr,setHasErr] = useState(false);
     const [loginData, setLoginData] = useState(
         localStorage.getItem('loginData')
             ? JSON.parse(localStorage.getItem('loginData'))
@@ -20,8 +20,17 @@ export default function Login() {
         const data = {
             token: googleData.tokenId
         }
-        const res = await Api().loginWithGG(data);
-        console.log(res)
+        const res = await new Api().loginWithGG(data);
+        if(res["error"] === false) {
+            localStorage["token"] = JSON.stringify( {
+                "access-token": res["accessToken"],
+                "refresh-token": res["refreshToken"],
+                "expired-at": 0
+            })
+            navigate("/category");
+        }else{
+            setHasErr(true)
+        }
     };
 
     const navigate = useNavigate();
@@ -57,6 +66,7 @@ export default function Login() {
             return;
         }
         await new Api().login(loginData["username"], loginData["password"]).then(res => {
+            console.log(res)
             if(res["error"] === false) {
                 localStorage["token"] = JSON.stringify( {
                     "access-token": res["accessToken"],
@@ -64,8 +74,10 @@ export default function Login() {
                     "expired-at": 0
                 })
                 navigate("/category");
+            }else{
+                setHasErr(true)
             }
-        }).catch(err => console.log(err));
+        });
     }
 
     const handleChange = (e) => {
@@ -80,9 +92,11 @@ export default function Login() {
             <div className="col"></div>
             <div className="col-3">
                 <h1 className="text-center fs-1 fw-bolder m-5">Login to have fun and learn better!</h1>
-                <div className="alert alert-danger" role="alert" style={{ display: "none" }}>
+                { hasErr && 
+                <div className="alert alert-danger" role="alert" >
                     The username or password are incorrect!
                 </div>
+                }
                 <div className="row my-4">
                     <GoogleLogin
                         clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
