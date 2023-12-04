@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import Login from './uis/Login/Login';
 import Register from './uis/Register';
-import ForgottenPassword from './uis/ForgottenPassword';
+import ForgottenPassword from './uis/forgot-password/index';
 import Dashboard from './uis/Dashboard';
 import Category from './uis/Category/Category';
 import VocabularyLesson from './uis/learning-word/vocabulary-lesson';

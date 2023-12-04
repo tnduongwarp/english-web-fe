@@ -5,7 +5,8 @@ export default function Header() {
     const navigate = useNavigate();
 
     const handleLogout = async () => {
-        await new AuthApi().logout();
+        const refreshToken =JSON.parse(localStorage['token']);
+        await new AuthApi().logout(refreshToken['refresh-token']);
         localStorage.removeItem("token");
         navigate("/login");
     }

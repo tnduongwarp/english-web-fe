@@ -14,7 +14,7 @@ export default class AuthApi {
        return await new ApiRoot().postRequestBase('/auth/login-with-gg',data);
     }
 
-    async logout() {
-        return await new ApiRoot().postRequestBase('/auth/logout', {refreshToken:localStorage["refresh-token"]});
+    async logout(refreshToken) {
+        return await new ApiRoot().postRequestBase('/auth/logout', {refreshToken:refreshToken});
     }
 }
