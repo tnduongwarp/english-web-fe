@@ -1,42 +1,68 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import Api from "../services/auth-api";
+import Footer from "./Footer";
+import {  notification } from 'antd';
 import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+    const navigate = useNavigate();
+    const [registerData, setRegisterData] = useState(null);
+    const [api, contextHolder] = notification.useNotification();
     //initState
-    useEffect(() => { 
-        document.title = "Register"; 
+    useEffect(() => {
+        document.title = "Register";
     }, []);
 
-    const navigate = useNavigate();
-    const onLoginClick = () => {
-        navigate("/login");
+    const handleRegister = async (e) => {
+        e.preventDefault();
+        if (registerData == null) {
+            return;
+        }
+        await new Api().signUp(registerData["username"], registerData["password"], registerData["email"]).then(res => {
+            console.log(res)
+            if(res.error === false){
+                api['success']({
+                    message: 'Success',
+                    description:
+                      'You have sign up successfully!',
+                      duration:3
+                  });
+                setTimeout(() => {
+                    navigate('/login')
+                },3500)
+            }
+        }).catch(err => console.log(err));
     }
 
-    return <div className="d-flex flex-column" style={{ height: "100vh" }}>
+    const handleChange = (e) => {
+        setRegisterData({ ...registerData, [e.target.name]: e.target.value });
+    }
+
+    return (
+        <>
+        {contextHolder}
+        <div className="d-flex flex-column" style={{ height: "100vh" }}>
         <div className="container-fluid bg-dark text-white p-2 d-flex justify-content-between">
             <h2>Logo</h2>
-            <button type="button" className="btn btn-info mx-5 px-4" style={{fontWeight: "bolder", fontSize: "1.2rem"}} onClick={onLoginClick}>Log in</button>
+            <Link to="/login" className="btn btn-info mx-5 px-4" style={{ fontWeight: "bolder", fontSize: "1.2rem" }}>Log in</Link>
         </div>
         <div className="row">
             <div className="col"></div>
             <div className="col-3">
                 <h1 className="text-center fs-1 fw-bolder m-5">Sign up and start learning!</h1>
-                <div className="row my-4">
-                    <button type="button" className="col-11 mx-auto btn btn-info d-flex justify-content-between" style={{ borderRadius: 30 }}>
-                        <img src="https://lh3.googleusercontent.com/COxitqgJr1sJnIDe8-jiKhxDx1FrYbtRHKJ9z_hELisAlapwE9LUPh6fcXIfb5vwpbMl4xl9H9TRFPc5NOO8Sb3VSgIBrfRYvW6cUA" alt="G" width="25" height="25" className="bg-light rounded-circle p-1" />
-                        <div className="flex-fill">Sign up with Google</div>
-                        <span></span>
-                    </button>
-                </div>
-                <p className="hr-line my-4">or</p>
                 <form action="">
                     <div className="my-4">
                         <label htmlFor="email" className="form-label">Email:</label>
-                        <input type="email" className="form-control" id="email" placeholder="Placeholder@domain.com" name="email" />
+                        <input type="email" className="form-control" placeholder="Your email go here!" name="email" onChange={handleChange} />
                     </div>
                     <div className="my-4">
-                        <label htmlFor="pwd" className="form-label">Password:</label>
-                        <input type="password" className="form-control" id="pwd" placeholder="Your password go here!" name="pswd" />
+                        <label htmlFor="username" className="form-label">Username:</label>
+                        <input type="text" className="form-control" placeholder="Your username go here!" name="username" onChange={handleChange} />
+                    </div>
+                    <div className="my-4">
+                        <label htmlFor="password" className="form-label">Password:</label>
+                        <input type="password" className="form-control" placeholder="Your password go here!" name="password" onChange={handleChange} />
                     </div>
                     <div className="my-4">
                         Make sure your password
@@ -46,15 +72,33 @@ export default function Register() {
                         </ul>
                     </div>
                     <div className="row my-4">
-                        <button type="submit" className="col-11 mx-auto btn btn-info">Sign up, it's free</button>
+                        <button type="submit" className="col-11 mx-auto btn btn-info" onClick={handleRegister}>Sign up, it's free</button>
                     </div>
                 </form>
             </div>
             <div className="col-1"></div>
         </div>
+        <div id="modal" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 id="modal-title" class="modal-title"> </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div id="modal-body" class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div className="flex-fill"></div>
-        <footer className="container-fluid bg-dark text-white mt-auto p-2">
-            <p>"It's never too late to start a new adventure!" - Unknown</p>
-        </footer>
+        <Footer />
     </div>
+        </>
+    )
+    
 }
