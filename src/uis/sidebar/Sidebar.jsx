@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 export default function Sidebar() {
     const location = useLocation();
     return <div className="col-2" id="sidebar-wrapper">
-        <nav id="sidebar" class="nav flex-column">
+        <nav id="sidebar" className="nav flex-column">
             <a id="sidebar-element" href="#">Home</a>
             <a id="sidebar-element" href="/dashboard/quiz" className={location.pathname === "/dashboard/quiz" ? "active" : "" }>Vocabulary</a>
             <a id="sidebar-element" href="#">Reading</a>

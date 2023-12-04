@@ -8,7 +8,7 @@ import Quiz from './Quiz/Quiz';
 
 import {  Route, Routes } from "react-router-dom";
 
-export default function Dashboard() {
+export default function Dashboard({categoryId}) {
     const navigate = useNavigate();
 
     useEffect(() => {

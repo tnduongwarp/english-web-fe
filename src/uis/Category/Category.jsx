@@ -5,9 +5,10 @@ import Header from "../Header";
 import Footer from "../Footer";
 import Api from '../../services/Api'
 import './style.css'
-export default function Category() {
+export default function Category({ setCategoryid}) {
     const navigate = useNavigate();
     const [categories, setCategories] = useState([]);
+     
     useEffect(() => {
         document.title = "Category";
         if (window.localStorage["token"] === undefined) navigate("/login");
@@ -17,9 +18,10 @@ export default function Category() {
             || token["expired-at"] === undefined) navigate("/login");
     }, [navigate]);
     useEffect(() => {
-        Api.getAllCategory().then( res => { setCategories(res?.data.data);}).catch(err => window.alert(err.message))
+        Api.getAllCategory().then( res => { console.log(res?.data.data); setCategories(res?.data.data);}).catch(err => window.alert(err.message))
     },[]);
    const onChooseLanguage = (id) => {
+        setCategoryid(id);
         navigate('/dashboard')
    }
     return (      
@@ -31,7 +33,7 @@ export default function Category() {
                         <div className="options">
                             { categories.map(category => (
                             <Card style={{ width: "25rem", height:"24rem" }} key ={category.id}>
-                                <Card.Img variant="top" src={process.env.PUBLIC_URL + '/assets/image/England.jpg'} alt="English" />
+                                <Card.Img style={{width:"400px", height:"266px"}} variant="top" src={process.env.PUBLIC_URL + category.imageUrl} alt="English" />
                                 <Card.Body>
                                     <Card.Title>{category.name}</Card.Title>
                                     <Button variant="primary" disabled = {category.isActive === 'active' ? false: true} onClick={() => onChooseLanguage(category.id)}>{category.isActive === 'active' ? 'Learn':'Coming soon'}</Button>
