@@ -6,10 +6,10 @@ const Question = ({question, selectedOption, onOptionChange, onSubmit, correct})
     return(
         <div className="">
             <h3>Question {question?.id}</h3>
-            <h5 className="mt-2">{question?.question}</h5>
+            <h5 className="mt-2">{question?.content}</h5>
             <form onSubmit={onSubmit} className="mt-2 mb-2">
                 <Options
-                    options={question?.options}
+                    options={[question.A, question.B, question.C, question.D]}
                     selectedOption={selectedOption}
                     onOptionChange={onOptionChange}
                 />

@@ -22,6 +22,7 @@ export default function Category({ setCategoryid}) {
     },[]);
    const onChooseLanguage = (id) => {
         setCategoryid(id);
+        sessionStorage['categoryId'] = id;
         navigate('/dashboard')
    }
     return (      

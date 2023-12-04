@@ -1,7 +1,19 @@
 import api from './axios-api'
 class Api{
-    async getAllCategory(){
+     getAllCategory(){
         return api.get('/category');
+    }
+     getAllLesson(userId, categoryId, courseId){
+        return api.post('/lesson/get-all-lesson', {userId, categoryId, courseId})
+    }
+    getWordsForLesson(wordIds){
+        return api.post('/word/get-by-id-array', {wordIdArray:wordIds})
+    }
+    getQuizByLessonId(lessonId){
+        return api.get('/quiz/'+ lessonId);
+    }
+    updateUserLessonStatus(status, updateAt, lessonId, userId){
+        return api.post('/lesson/update-status', {status, updateAt, lessonId, userId});
     }
 }
 // eslint-disable-next-line import/no-anonymous-default-export

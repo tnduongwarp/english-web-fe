@@ -1,22 +1,39 @@
 // App.js
-import React from 'react';
+import React, { useEffect , useState} from 'react';
 import WordList from './WordList';
-
-const words = [
-  { wordId: 1, originalWord: 'Example1', meaning: 'Meaning1', pronunciation: 'Pronunciation1' },
-  { wordId: 2, originalWord: 'Example2', meaning: 'Meaning2', pronunciation: 'Pronunciation2' },
-  // Add more words as needed
-];
+import Api from '../../services/Api';
 
 const VocabularyLesson = () => {
-  return (
-    <div>
-      <h1 style={{textAlign:"center", padding:"15px"}}>Word Display App</h1>
-      <div style={{display:'flex', justifyContent:"center"}}>
-        <WordList words={words} />
-      </div>
+  const [words, setWords] = useState([])
+  useEffect(() => {
+    let lessonId = sessionStorage['lessonId'];
+    let userId = localStorage['userId']
+    Api.updateUserLessonStatus('Inprogress', new Date(), lessonId, userId)
+    .then(res => {
+      console.log(res);
       
-    </div>
+    })
+    .catch(err => console.log(err))
+  },[])
+  
+  useEffect(() => {
+    let wordIds = sessionStorage['wordIds'].split(',');
+    console.log( wordIds)
+    Api.getWordsForLesson(wordIds)
+    .then(res => {
+      console.log(res);
+      setWords(res?.data.data)
+    })
+    .catch(err => console.log(err))
+  },[])
+  
+  return (
+      <div className='col-10'>
+        <h1 style={{textAlign:"center", padding:"15px"}}> Important words</h1>
+        <div style={{display:'flex', justifyContent:"center"}}>
+          {words.length && <WordList words={words} />}
+        </div>
+      </div>
   );
 };
 

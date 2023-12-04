@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import './style.css';
 import { LeftOutlined, RightOutlined,SmileOutlined } from '@ant-design/icons';
 import { Button, Result } from 'antd';
-const WordList = ({ words , quizId = 1}) => {
+const WordList = ({ words}) => {
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [completed, setCompleted] = useState(false);
@@ -21,7 +21,8 @@ const WordList = ({ words , quizId = 1}) => {
     }
   };
   const goToQuiz = () => {
-    navigate('/quiz/'+quizId);
+    const lessonId = sessionStorage['lessonId'];
+    navigate('/dashboard/vocabulary/quiz/'+lessonId);
   }
 
   return (

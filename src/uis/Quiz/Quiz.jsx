@@ -1,40 +1,11 @@
 import React,{ useState, useEffect } from "react";
 import Question from "./Question";
 import Score from "./Score";
-const qBank = [
-    {
-        id: 1,
-        question: "What is the capital of Haryana?",
-        options: ["Yamunanagar", "Panipat", "Gurgaon", "Chandigarh"],
-        answer: "Chandigarh",
-    },
-    {
-        id: 2,
-        question: "What is the capital of Punjab?",
-        options: ["Patiala", "Ludhiana", "Amritsar", "Chandigarh"],
-        answer: "Chandigarh",
-    },
-    {
-        id: 3,
-        question: "What is the capital of India?",
-        options: ["Delhi", "Mumbai", "Kolkata", "Chennai"],
-        answer: "Delhi"
-    },
-    {
-        id: 4,
-        question: "What is the capital of Uttarakhad?",
-        options: ["Roorkee", "Haridwar", "Dehradun", "Nanital"],
-        answer: "Dehradun"
-    },
-    {
-        id: 5,
-        question: "What is capital of Uttar Pradesh?",
-        options: ["GB Nagar", "Lucknow", "Prayagraj", "Agra"],
-        answer: "Lucknow"
-    },
-]
+import { useParams } from "react-router-dom";
+import Api from "../../services/Api";
+
 const Quiz = () =>{
-  
+    const params = useParams();
     const [questionBank,setQuestionBank] = useState([]);
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [selectedOption, setSelectedOption] = useState("");
@@ -43,8 +14,15 @@ const Quiz = () =>{
     const [loading,setLoading] = useState(true);
     const [correct, setCorrect] = useState(null);
    useEffect(() => {
-    setQuestionBank(qBank);
-    setLoading(false)
+    Api.getQuizByLessonId(params.id)
+    .then(res => {
+        setQuestionBank(res?.data.quiz);
+        setLoading(false);
+    })
+    .catch(err => {
+        console.log(err)
+    })
+    
    },[]);
 
     const handleOptionChange = (e) => {
@@ -61,7 +39,7 @@ const Quiz = () =>{
     };
  
     const checkAnswer = () => {
-        if (selectedOption === questionBank[currentQuestion].answer) {
+        if (selectedOption === questionBank[currentQuestion][questionBank[currentQuestion].answer]) {
             setScore((prevScore) => (prevScore+1));
             setCorrect('correct');
             
@@ -76,13 +54,21 @@ const Quiz = () =>{
             setCurrentQuestion((prevCurrentQuestion) => (prevCurrentQuestion+1));
             setSelectedOption("")
         } else {
-            setQuizEnd(true)
+            setQuizEnd(true);
+            let userId = localStorage['userId'];
+            let lessonId = sessionStorage['lessonId'];
+            Api.updateUserLessonStatus('Completed',new Date(), lessonId, userId)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => console.log(err))
         }
     };
     return (
-       <>
+       <div className="col-10">
+        <h2 style={{ marginBottom:"20px", marginTop:"10px"}}>Complete this Quiz to done this lesson</h2>
         { !loading &&  
-        <div className="App d-flex flex-column align-items-center justify-content-center">
+        <div className="App d-flex flex-column align-items-start justify-content-center" style={{marginLeft:"15px"}}>
             {!quizEnd ? (
                 <>
                     <Question
@@ -107,7 +93,7 @@ const Quiz = () =>{
         {
             loading && <div>Loading</div>
         }
-       </>
+    </div>
     )
 }
 export default Quiz

@@ -10,7 +10,7 @@ const WordCard = ({ word }) => {
   return (
     <div className={`word-card ${isFlipped ? 'flipped' : ''}`} onClick={handleCardClick}>
       <div className="word front">
-        <h3>{word.originalWord}</h3>
+        <h3>{word.original}</h3>
       </div>
       <div className="word back">
         <div className='item'>

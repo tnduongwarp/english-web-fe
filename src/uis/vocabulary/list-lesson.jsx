@@ -1,0 +1,81 @@
+import './style.css';
+import { Button } from 'antd';
+import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import Api from '../../services/Api';
+import {LoadingOutlined} from "@ant-design/icons"
+export default function ListLesson(){
+    const navigate = useNavigate();
+    const [inprogressLesson, setInprogressLesson] = useState([]);
+    const [newLesson, setNewLesson] = useState([]);
+    useEffect(() => {
+        let userId = localStorage['userId'];
+        console.log(userId);
+        let categoryId = sessionStorage['categoryId'];
+        let courseId = sessionStorage['courseId'];
+        Api.getAllLesson(userId,categoryId,courseId)
+        .then( res => {
+            console.log(res)
+            setInprogressLesson(res?.data.lessons.inprogress);
+            setNewLesson(res?.data.lessons.upcoming)
+        })
+        .catch(err => console.log(err))
+    },[])
+    const onClickButton = (lessonId, wordIds) => {
+        sessionStorage['wordIds'] = wordIds;
+        sessionStorage['lessonId'] = lessonId
+        navigate('/dashboard/vocabulary/vocabulary-lesson/');
+    }
+    return (
+        <div>
+            <div className="user-process">
+                <div className='user-process-header'>Continue learning</div>
+                {
+                    inprogressLesson.length && 
+                    <div className='card-container'>
+                        {
+                            inprogressLesson.map(item => 
+                            (
+                                <div className="user-process-card" key={item.id}>
+                                    <div className="user-process-card-info">
+                                        <h5>{item.title}</h5>
+                                        <div>{item.content}</div>
+                                    </div>
+                                    <a className="user-process-button" onClick={() => {onClickButton(item.id, item.wordIds)}}>
+                                        <div>Continue</div>
+                                    </a>
+                                </div>
+                            ))
+                        }
+                    </div>
+                }
+                {
+                    !inprogressLesson.length && <LoadingOutlined />
+                }
+            </div>
+            <div style={{height:"20px"}}></div>
+            <div className='new-lessson'>
+                <div className='new-lesson-header'>Up next</div>
+                {
+                    newLesson.length && 
+                    <div className='new-lesson-card-container'>
+                        {
+                            newLesson.map(item => 
+                            (
+                                <div className='new-lesson-card' key={item.id}>
+                                    <div className='new-lesson-card-info'>{item.content}</div>
+                                    <div className='new-lesson-button'>
+                                    <Button type="primary" onClick={() => { onClickButton(item.id, item.wordIds)}}>Go</Button>
+                                    </div>
+                                </div>
+                            ))
+                        }
+                    </div>
+                }
+                {
+                    !newLesson.length && <LoadingOutlined />
+                }
+            </div>
+        </div>
+    )
+}

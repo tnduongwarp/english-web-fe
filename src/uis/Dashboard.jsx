@@ -5,10 +5,12 @@ import Footer from "./Footer";
 import Sidebar from './sidebar/Sidebar';
 import Video from "./video/Video";
 import Quiz from './Quiz/Quiz';
+import ListLesson from "./vocabulary/list-lesson";
+import VocabularyLesson from "./learning-word/vocabulary-lesson";
 
 import {  Route, Routes } from "react-router-dom";
 
-export default function Dashboard({categoryId}) {
+export default function Dashboard({categoryId, courseId, setCourseId}) {
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -20,16 +22,16 @@ export default function Dashboard({categoryId}) {
             || token["expired-at"] === undefined) navigate("/login");
     }, [navigate]);
 
-    
-
     return <div className="d-flex flex-column" style={{ height: "100vh", }}>
         <Header />
         <div className="row">
-            <Sidebar/>
+            <Sidebar setCourseId={setCourseId}/>
             
                 <Routes>
                         <Route path="/video" element={<Video/>} />
-                        <Route path="/quiz" element={<Quiz/>} />
+                        <Route path="/vocabulary" element={<ListLesson />} />
+                        <Route path="/vocabulary/vocabulary-lesson" element = {<VocabularyLesson/>}/>
+                        <Route path="/vocabulary/quiz/:id" element={ <Quiz/>}/>
                 </Routes>
            
             

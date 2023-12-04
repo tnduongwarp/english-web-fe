@@ -12,17 +12,18 @@ import Dashboard from './uis/Dashboard';
 import Category from './uis/Category/Category';
 import VocabularyLesson from './uis/learning-word/vocabulary-lesson';
 import Quiz from './uis/Quiz/Quiz';
+import ListLesson from './uis/vocabulary/list-lesson';
 import { useState } from 'react';
 
   function App(){
     const [categoryId, setCategoryId] = useState(null);
+    const [courseId, setCourseId] = useState(null);
     const router = createBrowserRouter(
         [
           { path: "/login", element: <Login />, index: true },
           { path: "/register", element: <Register /> },
-          { path: "/dashboard/*", element: <Dashboard categoryId={categoryId}/> },
+          { path: "/dashboard/*", element: <Dashboard categoryId={categoryId} courseId={courseId} setCourseId={setCourseId}/> },
           { path: "/vocabulary", element: <VocabularyLesson /> },
-          { path: "quiz/:id", element: <Quiz/>},
           {
             path: "/password",
             children: [
@@ -30,7 +31,6 @@ import { useState } from 'react';
             ]
           },
           { path: "/category", element: <Category setCategoryid={setCategoryId}/> },
-          
           { path:"*", element: <Navigate to="/login" />}
           
         ]);
