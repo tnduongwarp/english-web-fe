@@ -31,7 +31,7 @@ export default function OTPInput (){
       e.preventDefault()
        if (parseInt(otpInput.join("")) === otp) {
         console.log('oke');
-        ApiRoot.postRequestBase('/auth/get-change-pw-token',{email: email})
+        new ApiRoot().postRequestBase('/auth/get-change-pw-token',{email: email})
         .then(res => {
           setToken(res.token);
           setPage('change');

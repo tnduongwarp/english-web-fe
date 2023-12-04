@@ -51,7 +51,7 @@ export default function ChangePassword() {
             newPassword: newPassword,
             token: token
         }
-        ApiRoot.postRequestBase('/forgot-pw/change-pw', data)
+        new ApiRoot().postRequestBase('/forgot-pw/change-pw', data)
         .then( res => {
             if(res.message === 'success') {
                 console.log('change ok');

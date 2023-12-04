@@ -15,7 +15,7 @@ export default function ForgottenPassword() {
             OTP: OTP
           };
           setIsLoading(true);
-          ApiRoot.postRequestBase('/forgot-pw/send_recovery_email',data)
+          new ApiRoot().postRequestBase('/forgot-pw/send_recovery_email',data)
           .then((res) => {
             console.log(res)
             if(res.error === false){
