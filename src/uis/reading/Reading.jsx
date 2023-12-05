@@ -1,9 +1,7 @@
 import React,{ useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {Container, Row, Col, Card, Button} from "react-bootstrap";
-import Header from "../Header";
-import Footer from "../Footer";
-import Sidebar from "../sidebar/Sidebar";
+
 import Api from '../../services/Api'
 import './style.css'
 export default function Reading({}) {
@@ -18,10 +16,6 @@ export default function Reading({}) {
             || token["expired-at"] === undefined) navigate("/login");
     }, [navigate]);
     return (
-        <div>
-        <Header/>
-                <div class="d-flex flex-row">
-                <Sidebar/>
                 <div class="col-10 paragraph">
                     <Card>
                         <h5>PASSAGE 1</h5>
@@ -40,9 +34,6 @@ export default function Reading({}) {
                             <input type = 'submit' className="btn btn-info mx-5 px-4" style={{width:"10rem"}}/>
                         </form>
                     </Card>
-                </div>
-                </div>
-        <Footer/> 
-        </div>
+                </div>       
     )
 }

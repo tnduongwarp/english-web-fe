@@ -38,8 +38,8 @@ export default function ListLesson(){
                             (
                                 <div className="user-process-card" key={item.id}>
                                     <div className="user-process-card-info">
-                                        <h5>{item.title}</h5>
-                                        <div>{item.content}</div>
+                                        <div ><span style={{fontSize:'1.5rem', fontWeight: 'bold'}}> {item.title}</span></div>
+                                        <div ><span style={{fontSize:'1rem'}}>{item.content}</span></div>
                                     </div>
                                     <a className="user-process-button" onClick={() => {onClickButton(item.id, item.wordIds)}}>
                                         <div>Continue</div>

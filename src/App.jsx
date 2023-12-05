@@ -11,8 +11,8 @@ import ForgottenPassword from './uis/forgot-password/index';
 import Dashboard from './uis/Dashboard';
 import Category from './uis/Category/Category';
 import VocabularyLesson from './uis/learning-word/vocabulary-lesson';
-import Quiz from './uis/Quiz/Quiz';
-import ListLesson from './uis/vocabulary/list-lesson';
+
+
 import { useState } from 'react';
 
   function App(){
@@ -31,6 +31,7 @@ import { useState } from 'react';
             ]
           },
           { path: "/category", element: <Category setCategoryid={setCategoryId}/> },
+          
           { path:"*", element: <Navigate to="/login" />}
           
         ]);

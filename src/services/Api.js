@@ -15,6 +15,9 @@ class Api{
     updateUserLessonStatus(status, updateAt, lessonId, userId){
         return api.post('/lesson/update-status', {status, updateAt, lessonId, userId});
     }
+    getDataForHome(userId, categoryId){
+        return api.post('/lesson/get-data-for-home-page',{ userId, categoryId})
+    }
 }
 // eslint-disable-next-line import/no-anonymous-default-export
 export default new Api();

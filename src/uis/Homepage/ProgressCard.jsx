@@ -1,28 +1,34 @@
 import React from 'react'
-
-export default function ProgressCard({ iconTitle, progressRing, bgC, typeCard, activeCardFnc, activeCard,title,step }) {
-
+import { useNavigate } from "react-router-dom";
+ 
+export default function ProgressCard({ iconTitle, progressRing, bgC, typeCard, activeCardFnc, activeCard,title,step, nextLesson }) {
+    const navigate = useNavigate();
     const handleActiveCard = (typeCard) => {
         activeCardFnc(typeCard)
+    }
+    const onClickButton = () => {
+        console.log('1')
+        sessionStorage['courseId'] = 1
+        navigate('/dashboard/vocabulary');
     }
     return (
         <div className={activeCard ? 'progress-card active-card' : 'progress-card'} style={{ background: `none ${bgC}` }} onClick={() => handleActiveCard(typeCard)}>
             <div className='circle'>
-                <div class="circle-title">
-                    <span class="circle-title-icon">
+                <div className="circle-title">
+                    <span className="circle-title-icon">
                         {iconTitle}
                     </span>
-                    <div class="circle-title-text">{title}</div>
+                    <div className="circle-title-text">{title}</div>
                 </div>
-                <div class="circle-progress">{step}
-                    <div class="circle-progress-icon">
-                        <div data-testid="progressRing" class="progressRing">
+                <div className="circle-progress">{step}
+                    <div className="circle-progress-icon">
+                        <div data-testid="progressRing" className="progressRing">
                             {progressRing}
                         </div>
                     </div>
                 </div>
                 <div class="circle-text">
-                    <p class="sc-r8akwn-7 lhiYoM">từ</p>
+                    <p class="sc-r8akwn-7 lhiYoM">Lesson</p>
                 </div>
             </div>
             <div className='next-activity-card'>
@@ -32,7 +38,7 @@ export default function ProgressCard({ iconTitle, progressRing, bgC, typeCard, a
                         <div className='scenarioCard-first-content'>
                             <div class="scenarioCard-content">
                                 <div class="scenarioCard-content-title">
-                                    <h5 class="ScenarioCardInProgress-Wrapper-title">Chào Hỏi</h5>
+                                    <h5 class="ScenarioCardInProgress-Wrapper-title">{nextLesson}</h5>
                                 </div>
                                 <div data-testid="progressBar-0" class="sc-15t60mv-0 jykhnm">
                                     <div color="black" class="sc-15t60mv-1 bJnwRw">
@@ -41,11 +47,11 @@ export default function ProgressCard({ iconTitle, progressRing, bgC, typeCard, a
                             </div>
                         </div>
                     </button>
-                    <button class="scenarios-button-second">
-                        <div class="scenarios-button-second-title">Học tình huống này</div>
+                    <button  onClick={ onClickButton} class="scenarios-button-second">
+                        <div class="scenarios-button-second-title" >Học tình huống này</div>
                     </button>
-                    <button class="scenarios-button-third">
-                        <div class="sc-p01vsu-2 dTZeul">Các tình huống khác</div>
+                    <button onClick={ onClickButton} class="scenarios-button-third">
+                        <div class="sc-p01vsu-2 dTZeul"  >Các tình huống khác</div>
                     </button>
                 </div>
             </div>

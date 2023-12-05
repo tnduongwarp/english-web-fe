@@ -7,7 +7,8 @@ import Video from "./video/Video";
 import Quiz from './Quiz/Quiz';
 import ListLesson from "./vocabulary/list-lesson";
 import VocabularyLesson from "./learning-word/vocabulary-lesson";
-
+import Home from './Homepage/index';
+import Reading from './reading/Reading';
 import {  Route, Routes } from "react-router-dom";
 
 export default function Dashboard({categoryId, courseId, setCourseId}) {
@@ -32,6 +33,8 @@ export default function Dashboard({categoryId, courseId, setCourseId}) {
                         <Route path="/vocabulary" element={<ListLesson />} />
                         <Route path="/vocabulary/vocabulary-lesson" element = {<VocabularyLesson/>}/>
                         <Route path="/vocabulary/quiz/:id" element={ <Quiz/>}/>
+                        <Route path= "/home" element= {<Home/>}/>
+                        <Route path= "/reading" element = {<Reading/>}/>
                 </Routes>
            
             

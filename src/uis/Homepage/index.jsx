@@ -2,36 +2,55 @@ import React, { useEffect, useState } from "react";
 import "./style.css";
 import ProgressCard from "./ProgressCard";
 import { HandSvg, ProgressRing, PlayBtn } from "./svg";
+import Api from "../../services/Api";
 
 export default function Home() {
   const [active, setActive] = useState({
     vocabulary: true,
-    listen: false,
-    talk:false
+    listening: false,
+    reading:false
   });
+  const [progress, setProgress] = useState({
+    vocabulary:'',
+    reading: '',
+    listening: ''
+  })
 
+  useEffect(() => {
+    const userId = localStorage['userId'];
+    const categoryId = sessionStorage['categoryId'];
+    Api.getDataForHome(userId, categoryId)
+    .then(res => {
+      console.log(res.data);
+      let newState = {...progress};
+      newState.vocabulary = res?.data.data[0];
+      newState.reading = res?.data.data[1];
+      newState.listening = res?.data.data[2];
+      setProgress(newState);
+    })
+  }, []);
   const handleActiveCard = (data) => {
     const newState = { ...active };
     switch (data) {
       case "vocabulary": {
-        newState.listen = false;
+        newState.listening = false;
         newState.vocabulary = true;
-         newState.talk= false
+         newState.reading= false
         setActive(newState);
         break;
       }
 
-      case "listen": {
+      case "listening": {
         newState.vocabulary = false;
-        newState.listen = true;
-        newState.talk= false
+        newState.listening = true;
+        newState.reading= false
         setActive(newState);
         break;
       }
-       case "talk": {
+       case "reading": {
         newState.vocabulary = false;
-        newState.listen = false;
-        newState.talk= true
+        newState.listening = false;
+        newState.reading= true
         setActive(newState);
         break;
       }
@@ -39,37 +58,40 @@ export default function Home() {
   };
   return (
     <div className="home-page col-10">
-      <h2 className="home-page-title">Tiến độ hàng tuần</h2>
+      <h2 className="home-page-title">Thành tích của bạn</h2>
       <div className="progress-card-wrapper">
         <ProgressCard
           iconTitle={<HandSvg />}
-          title="Xây dựng vốn từ vựng"
-          step="0/35"
+          title="Vocabulary"
+          step={`${progress.vocabulary?.completed || 0}/${progress.vocabulary?.total || 0}`}
           progressRing={<ProgressRing stroke1="#5DE7C0" stroke2="#E3FFF7" />}
           bgC="#00A778"
           activeCardFnc={handleActiveCard}
           activeCard={active.vocabulary}
           typeCard="vocabulary"
+          nextLesson={progress.vocabulary?.next ? progress.vocabulary?.next[0]?.title : 'N/A'}
         />
         <ProgressCard
           iconTitle={<PlayBtn />}
-           title="Luyện tập lắng nghe"
-           step="0/5"
+           title="Reading"
+           step={`${progress.reading?.completed || 0}/${progress.reading?.total || 0}`}
           progressRing={<ProgressRing stroke1="#FFBFBC" stroke2="#FFF9F9" />}
           bgC="#E46962"
           activeCardFnc={handleActiveCard}
-          activeCard={active.listen}
-          typeCard="listen"
+          activeCard={active.reading}
+          typeCard="reading"
+          nextLesson={progress.reading?.next ?  progress.reading?.next[0]?.title : 'N/A'}
         />
          <ProgressCard
           iconTitle={<PlayBtn />}
-           title="Luyện tập nói"
-           step="0/5"
+           title="Listening"
+           step={`${progress.listening?.completed || 0}/${progress.listening?.total || 0}`}
           progressRing={<ProgressRing stroke1="#FFBFBC" stroke2="#FFF9F9" />}
           bgC="#E46962"
           activeCardFnc={handleActiveCard}
-          activeCard={active.talk}
-          typeCard="talk"
+          activeCard={active.listening}
+          typeCard="listening"
+          nextLesson={progress.listening?.next ? progress.listening?.next[0]?.title : 'N/A'}
         />
       </div>
     </div>

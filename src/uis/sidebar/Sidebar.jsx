@@ -12,9 +12,9 @@ export default function Sidebar({setCourseId}) {
     }
     return <div className="col-2" id="sidebar-wrapper">
         <nav id="sidebar" className="nav flex-column">
-            <a id="sidebar-element" onClick={() =>handleClick(0,'#')}>Home</a>
+            <a id="sidebar-element" onClick={() =>handleClick(0,'/dashboard/home')}>Home</a>
             <a id="sidebar-element" onClick={() =>handleClick(1,'/dashboard/vocabulary')} className={location.pathname.includes("/dashboard/vocabulary") ? "active" : "" }>Vocabulary</a>
-            <a id="sidebar-element"  onClick={() =>handleClick(2,'#')}>Reading</a>
+            <a id="sidebar-element"  onClick={() =>handleClick(2,'/dashboard/reading')}>Reading</a>
             <a id="sidebar-element"  onClick={() =>handleClick(3,'/dashboard/video')}  className={location.pathname === "/dashboard/video" ? "active" : ""}>Listening</a>
         </nav>
     </div>;
