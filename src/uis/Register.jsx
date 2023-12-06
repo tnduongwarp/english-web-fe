@@ -44,7 +44,7 @@ export default function Register() {
         {contextHolder}
         <div className="d-flex flex-column" style={{ height: "100vh" }}>
         <div className="container-fluid bg-dark text-white p-2 d-flex justify-content-between">
-            <h2>Logo</h2>
+            <h5>Hello</h5>
             <Link to="/login" className="btn btn-info mx-5 px-4" style={{ fontWeight: "bolder", fontSize: "1.2rem" }}>Log in</Link>
         </div>
         <div className="row">

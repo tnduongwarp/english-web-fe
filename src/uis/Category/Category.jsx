@@ -23,11 +23,13 @@ export default function Category({ setCategoryid}) {
    const onChooseLanguage = (id) => {
         setCategoryid(id);
         sessionStorage['categoryId'] = id;
-        navigate('/dashboard')
+        navigate('/dashboard/home')
    }
     return (      
             <Container fluid>
-                <Header/>
+                <Row>
+                    <Header/>       
+                </Row>
                 <Row>   
                     <Col  id="page-content-wrapper" style={{margin: "0.5rem 0 0.5rem 0"}}>
                         <h2 style={{ margin: "2rem" }}>Explore new languges!</h2>  

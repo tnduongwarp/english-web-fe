@@ -1,16 +1,40 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom";
  
-export default function ProgressCard({ iconTitle, progressRing, bgC, typeCard, activeCardFnc, activeCard,title,step, nextLesson }) {
+export default function ProgressCard({ iconTitle, progressRing, bgC, typeCard, activeCardFnc, activeCard,title,step, nextLesson, nextLessonId, nextWordIds }) {
     const navigate = useNavigate();
     const handleActiveCard = (typeCard) => {
         activeCardFnc(typeCard)
     }
-    const onClickButton = () => {
-        console.log('1')
-        sessionStorage['courseId'] = 1
-        navigate('/dashboard/vocabulary');
+    const onClickButton1 = () => {
+        
+        sessionStorage['wordIds'] = nextWordIds;
+        sessionStorage['lessonId'] = nextLessonId;
+        if(typeCard === 'vocabulary'){
+            sessionStorage['courseId'] = 1;
+            navigate('/dashboard/vocabulary/vocabulary-lesson/');
+        }
+            
+        else if(typeCard === 'reading'){
+            sessionStorage['courseId'] = 2;
+            navigate('/dashboard/reading/reading-lesson/');
+        }
+            
     }
+
+    const onClickButton2 = () => {
+        
+        if(typeCard === 'vocabulary'){
+            sessionStorage['courseId'] = 1;
+            navigate('/dashboard/vocabulary');
+        }
+            
+        else if(typeCard === 'reading'){
+            sessionStorage['courseId'] = 2;
+            navigate('/dashboard/reading');
+        }
+    }
+
     return (
         <div className={activeCard ? 'progress-card active-card' : 'progress-card'} style={{ background: `none ${bgC}` }} onClick={() => handleActiveCard(typeCard)}>
             <div className='circle'>
@@ -27,31 +51,31 @@ export default function ProgressCard({ iconTitle, progressRing, bgC, typeCard, a
                         </div>
                     </div>
                 </div>
-                <div class="circle-text">
-                    <p class="sc-r8akwn-7 lhiYoM">Lesson</p>
+                <div className="circle-text">
+                    <p className="sc-r8akwn-7 lhiYoM">Lesson</p>
                 </div>
             </div>
             <div className='next-activity-card'>
-                <div class="activity-card-title">Tiếp theo dành cho bạn</div>
-                <div class="activity-card-input">
-                    <button class="scenarioCard-first">
+                <div className="activity-card-title">Tiếp theo dành cho bạn</div>
+                <div className="activity-card-input">
+                    <button className="scenarioCard-first">
                         <div className='scenarioCard-first-content'>
-                            <div class="scenarioCard-content">
-                                <div class="scenarioCard-content-title">
-                                    <h5 class="ScenarioCardInProgress-Wrapper-title">{nextLesson}</h5>
+                            <div className="scenarioCard-content">
+                                <div className="scenarioCard-content-title">
+                                    <h5 className="ScenarioCardInProgress-Wrapper-title">{nextLesson}</h5>
                                 </div>
-                                <div data-testid="progressBar-0" class="sc-15t60mv-0 jykhnm">
-                                    <div color="black" class="sc-15t60mv-1 bJnwRw">
+                                <div data-testid="progressBar-0" className="sc-15t60mv-0 jykhnm">
+                                    <div color="black" className="sc-15t60mv-1 bJnwRw">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </button>
-                    <button  onClick={ onClickButton} class="scenarios-button-second">
-                        <div class="scenarios-button-second-title" >Học tình huống này</div>
+                    <button disabled = {((!nextLessonId || !nextWordIds)&& typeCard === 'vocabulary') || ((!nextLessonId) && typeCard==='reading')} onClick={ onClickButton1} className="scenarios-button-second">
+                        <div className="scenarios-button-second-title" >Học tình huống này</div>
                     </button>
-                    <button onClick={ onClickButton} class="scenarios-button-third">
-                        <div class="sc-p01vsu-2 dTZeul"  >Các tình huống khác</div>
+                    <button onClick={ onClickButton2} class="scenarios-button-third">
+                        <div className="sc-p01vsu-2 dTZeul"  >Các tình huống khác</div>
                     </button>
                 </div>
             </div>

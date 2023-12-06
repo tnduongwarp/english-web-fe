@@ -70,6 +70,8 @@ export default function Home() {
           activeCard={active.vocabulary}
           typeCard="vocabulary"
           nextLesson={progress.vocabulary?.next ? progress.vocabulary?.next[0]?.title : 'N/A'}
+          nextLessonId = {progress.vocabulary?.next ? progress.vocabulary?.next[0]?.id : null}
+          nextWordIds={progress.vocabulary?.next ? progress.vocabulary?.next[0]?.wordIds : null}
         />
         <ProgressCard
           iconTitle={<PlayBtn />}
@@ -81,6 +83,8 @@ export default function Home() {
           activeCard={active.reading}
           typeCard="reading"
           nextLesson={progress.reading?.next ?  progress.reading?.next[0]?.title : 'N/A'}
+          nextLessonId = {progress.reading?.next ? progress.reading?.next[0]?.id : null}
+          nextWordIds={progress.reading?.next ? progress.reading?.next[0]?.wordIds : null}
         />
          <ProgressCard
           iconTitle={<PlayBtn />}
@@ -92,6 +96,8 @@ export default function Home() {
           activeCard={active.listening}
           typeCard="listening"
           nextLesson={progress.listening?.next ? progress.listening?.next[0]?.title : 'N/A'}
+          nextLessonId = {progress.listening?.next ? progress.listening?.next[0]?.id : null}
+          nextWordIds={progress.listening?.next ? progress.listening?.next[0]?.wordIds : null}
         />
       </div>
     </div>

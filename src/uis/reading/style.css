@@ -21,3 +21,88 @@ h5{
     flex-wrap: wrap;
     flex-direction: column;
 }
+
+.user-process-header, .new-lesson-header{
+    font-size: 1.5rem;
+    color: rgb(0, 17, 34);
+    font-weight: 700;
+    line-height: 1rem;
+    margin: 20px 0px 30px 20px ;
+}
+.card-container{
+    display: flex;
+    gap: 10px;
+    margin-left: 30px;
+}
+.user-process-card{
+    width: 400px;
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(246, 246, 246);
+    height: 100%;
+    padding: 1rem 0px 0.75rem 0.75rem;
+    border-style: solid;
+    border-color: rgb(204, 210, 222);
+    border-image: initial;
+    border-width: 0.5px 0.5px 4px;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    position: relative;
+}
+.user-process-card:hover{
+    background-color: rgb(228, 228, 228);
+}
+.user-process-button{
+    border: none;
+    min-height: 2rem;
+    padding: 0px 1rem;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    background: rgb(255, 187, 0);
+    color: rgb(0, 17, 34);
+    box-shadow: rgb(204, 150, 0) 0px 0.25rem 0px;
+    cursor: pointer;
+    width: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.new-lesson-card{
+    width: 176px;
+    height: 128px;
+    padding: 0.75rem 0px 0.75rem 0.75rem;
+    border-style: solid;
+    border-color: rgb(255, 201, 51);
+    border-image: initial;
+    background-image: url('D:/CongNgheWeb/frontend_cnwvdvtt/public/assets/image/activities.png');
+    border-width: 0px 0px 4px;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    position: relative;
+    background-color: rgb(255, 241, 204);
+    background-repeat: no-repeat;
+    background-position: right 0rem top 0.25rem;
+}
+.new-lesson-card-info{
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-align: left;
+    bottom: 0.75rem;
+    margin: 0px;
+    padding-right: 3rem;
+    color: rgb(0, 0, 0);
+}
+.new-lesson-button{
+    position: absolute;
+    bottom: 0.5rem;
+}
+.new-lesson-card-container{
+    margin-left: 30px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}

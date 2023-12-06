@@ -18,6 +18,9 @@ class Api{
     getDataForHome(userId, categoryId){
         return api.post('/lesson/get-data-for-home-page',{ userId, categoryId})
     }
+    getLessonById(lessonId){
+        return api.get('/lesson/'+ lessonId);
+    }
 }
 // eslint-disable-next-line import/no-anonymous-default-export
 export default new Api();

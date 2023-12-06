@@ -27,7 +27,8 @@ export default function Login() {
                 "refresh-token": res["refreshToken"],
                 "expired-at": 0
             });
-            localStorage['userId'] = JSON.stringify(res.user.id)
+            localStorage['userId'] = JSON.stringify(res.user.id);
+            localStorage['userName'] = JSON.stringify(res.user.username);
             navigate("/category");
         }else{
             setHasErr(true)
@@ -74,6 +75,8 @@ export default function Login() {
                     "refresh-token": res["refreshToken"],
                     "expired-at": 0
                 })
+                localStorage['userId'] = JSON.stringify(res.user.id);
+                localStorage['userName'] = JSON.stringify(res.user.username);
                 navigate("/category");
             }else{
                 setHasErr(true)
@@ -86,9 +89,6 @@ export default function Login() {
     }
 
     return <div className="d-flex flex-column" style={{ height: "100vh" }}>
-        <div className="container-fluid bg-dark text-white p-1">
-            <h2>Logo</h2>
-        </div>
         <div className="row">
             <div className="col"></div>
             <div className="col-3">
@@ -143,6 +143,6 @@ export default function Login() {
             <div className="col"></div>
         </div>
         <div className="flex-fill"></div>
-        <Footer />
+       
     </div>;
 }

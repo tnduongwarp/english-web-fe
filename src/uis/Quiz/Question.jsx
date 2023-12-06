@@ -6,7 +6,7 @@ const Question = ({question, selectedOption, onOptionChange, onSubmit, correct})
     return(
         <div className="">
             <h3>Question {question?.id}</h3>
-            <h5 className="mt-2">{question?.content}</h5>
+            <div style={{fontSize:'1.25rem', fontStyle:'italic'}}>{question?.content}</div>
             <form onSubmit={onSubmit} className="mt-2 mb-2">
                 <Options
                     options={[question.A, question.B, question.C, question.D]}
