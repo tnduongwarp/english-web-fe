@@ -11,3 +11,11 @@
 }
 
  */
+ .mask-youtube {
+    position: absolute;
+    background: rgba(0,0,0,0);
+    width: 385px;
+    height: 250px;
+    top: 0;
+    left: 0;
+  }

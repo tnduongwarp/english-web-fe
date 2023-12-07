@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import Sidebar from './sidebar/Sidebar';
-import Video from "./video/Video";
+import Listening from './Listening/Listening'
 import Quiz from './Quiz/Quiz';
 import ListLesson from "./vocabulary/list-lesson";
 import VocabularyLesson from "./learning-word/vocabulary-lesson";
@@ -30,7 +30,7 @@ export default function Dashboard({categoryId, courseId, setCourseId}) {
             <Sidebar setCourseId={setCourseId}/>
             
                 <Routes>
-                        <Route path="/video" element={<Video/>} />
+                        <Route path="/video" element={<Listening/>} />
                         <Route path="/vocabulary" element={<ListLesson />} />
                         <Route path="/vocabulary/vocabulary-lesson" element = {<VocabularyLesson/>}/>
                         <Route path="/vocabulary/quiz/:id" element={ <Quiz/>}/>

@@ -56,7 +56,7 @@ export default function ProgressCard({ iconTitle, progressRing, bgC, typeCard, a
                 </div>
             </div>
             <div className='next-activity-card'>
-                <div className="activity-card-title">Tiếp theo dành cho bạn</div>
+                <div className="activity-card-title">Inprogress Lesson</div>
                 <div className="activity-card-input">
                     <button className="scenarioCard-first">
                         <div className='scenarioCard-first-content'>
@@ -72,10 +72,10 @@ export default function ProgressCard({ iconTitle, progressRing, bgC, typeCard, a
                         </div>
                     </button>
                     <button disabled = {((!nextLessonId || !nextWordIds)&& typeCard === 'vocabulary') || ((!nextLessonId) && typeCard==='reading')} onClick={ onClickButton1} className="scenarios-button-second">
-                        <div className="scenarios-button-second-title" >Học tình huống này</div>
+                        <div className="scenarios-button-second-title" >Continue Learning</div>
                     </button>
                     <button onClick={ onClickButton2} class="scenarios-button-third">
-                        <div className="sc-p01vsu-2 dTZeul"  >Các tình huống khác</div>
+                        <div className="sc-p01vsu-2 dTZeul"  >More Lesson</div>
                     </button>
                 </div>
             </div>
