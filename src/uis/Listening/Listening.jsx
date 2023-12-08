@@ -13,6 +13,8 @@ export default function Listening() {
     const [newLesson, setNewLesson] = useState([]);
     const [completedLesson, setCompletedLesson] = useState([]);
     const [displayLesson, setDisplayLesson] = useState([]);
+    const [filterLesson, setFilterLesson] = useState([]);
+    const [input, setInput] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectLesson, setSelectLesson] = useState({
         thumbnail: '', 
@@ -20,6 +22,11 @@ export default function Listening() {
     });
     const navigate = useNavigate();
     const videoRef = useRef(null);
+    const onInputChange = (e) => {
+        setInput(e.target.value);
+        const data = displayLesson.filter(item => (item.content.toLowerCase().includes(e.target.value)));
+        setFilterLesson(data);
+    }
     const handleOk = () => {
         setIsModalOpen(false);
         videoRef.current.src = '';
@@ -75,6 +82,7 @@ export default function Listening() {
               ];
               console.log(data);
               setDisplayLesson(data);
+              setFilterLesson(data)
         })
         .catch(err => console.log(err))
     },[]);
@@ -85,10 +93,12 @@ export default function Listening() {
         console.log(index)
         switch(index){
             case 0: setDisplayLesson([...completedLesson,...inprogressLesson,...newLesson]);
+                    setFilterLesson([...completedLesson,...inprogressLesson,...newLesson]) ;
+                    setInput('');
                     break;
-            case 1: setDisplayLesson(newLesson); break;
-            case 2: setDisplayLesson(completedLesson); break;
-            case 3: setDisplayLesson(inprogressLesson); break;
+            case 1: setDisplayLesson(newLesson); setFilterLesson(newLesson) ;setInput(''); break;
+            case 2: setDisplayLesson(completedLesson); setFilterLesson(completedLesson) ; setInput(''); break;
+            case 3: setDisplayLesson(inprogressLesson); setFilterLesson(inprogressLesson) ; setInput(''); break;
             default: return;
         }
     }
@@ -101,9 +111,9 @@ export default function Listening() {
             <div className="col-2"></div>
             <div className="col-2 p-2"></div>
             <div className="col-3 p-2">
-                <input type="text" className="form-inline" placeholder="🔍 Search"></input>
+                <input type="text" className="form-inline" placeholder="🔍 Search" value={input} onChange={(e) => {onInputChange(e)}}></input>
             </div>
-            {displayLesson.length >0 && displayLesson.map(value => <VideoItem video={{id: value.id, thumbnail: value?.videoUrl, title: value?.title, description: value?.content ,  showModal: showModal, setSelectLesson: setSelectLesson}} />)}
+            {filterLesson.length >0 && filterLesson.map(value => <VideoItem video={{id: value.id, thumbnail: value?.videoUrl, title: value?.title, description: value?.content ,  showModal: showModal, setSelectLesson: setSelectLesson}} />)}
         </div>
         <Modal
             title={selectLesson.title}
@@ -141,7 +151,6 @@ export function VideoItem(props) {
         <div className="card">
             <div className="card-img-top position-relative " style={{height:"250px"}}>
                 <iframe
-                    lassName="video-iframe"
                     title={props.video.title}
                     width="100%"
                     height="100%"

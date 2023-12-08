@@ -19,6 +19,10 @@ export default function ProgressCard({ iconTitle, progressRing, bgC, typeCard, a
             sessionStorage['courseId'] = 2;
             navigate('/dashboard/reading/reading-lesson/');
         }
+        else if(typeCard === 'listening'){
+            sessionStorage['courseId'] = 3;
+            navigate('/dashboard/listening');
+        }
             
     }
 

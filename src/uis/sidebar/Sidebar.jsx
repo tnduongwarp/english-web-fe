@@ -15,7 +15,7 @@ export default function Sidebar({setCourseId}) {
             <a id="sidebar-element" onClick={() =>handleClick(0,'/dashboard/home')}>Home</a>
             <a id="sidebar-element" onClick={() =>handleClick(1,'/dashboard/vocabulary')} className={location.pathname.includes("/dashboard/vocabulary") ? "active" : "" }>Vocabulary</a>
             <a id="sidebar-element"  onClick={() =>handleClick(2,'/dashboard/reading')}  className={location.pathname.includes("/dashboard/reading") ? "active" : "" }>Reading</a>
-            <a id="sidebar-element"  onClick={() =>handleClick(3,'/dashboard/video')}  className={location.pathname === "/dashboard/video" ? "active" : ""}>Listening</a>
+            <a id="sidebar-element"  onClick={() =>handleClick(3,'/dashboard/listening')}  className={location.pathname === "/dashboard/listening" ? "active" : ""}>Listening</a>
         </nav>
     </div>;
 }

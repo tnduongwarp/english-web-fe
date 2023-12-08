@@ -30,7 +30,7 @@ export default function Dashboard({categoryId, courseId, setCourseId}) {
             <Sidebar setCourseId={setCourseId}/>
             
                 <Routes>
-                        <Route path="/video" element={<Listening/>} />
+                        <Route path="/listening" element={<Listening/>} />
                         <Route path="/vocabulary" element={<ListLesson />} />
                         <Route path="/vocabulary/vocabulary-lesson" element = {<VocabularyLesson/>}/>
                         <Route path="/vocabulary/quiz/:id" element={ <Quiz/>}/>
