@@ -16,11 +16,18 @@ export default function Header() {
         localStorage.removeItem("token");
         navigate("/login");
     }
+    const handleChangeLanguage = () => {
+        navigate("/category");
+    }
     return (
         
             <header className="container-fluid bg-dark text-white p-2 d-flex justify-content-between">
                 <h3>{`Hi ${userName}!`}</h3>
-                <button className="btn btn-info mx-5 px-4" style={{ fontWeight: "bolder", fontSize: "1.2rem" }} onClick={handleLogout}>Log out</button>
+                <div className="d-flex ">
+                    <button className="btn btn-info px-4" style={{ fontWeight: "bolder", fontSize: "1.2rem" }} onClick={handleChangeLanguage}>Change language</button>
+                    <button className="btn btn-info mx-2 px-4" style={{ fontWeight: "bolder", fontSize: "1.2rem" }} onClick={handleLogout}>Log out</button>
+                </div>
+                
             </header>
       
     )
