@@ -49,9 +49,7 @@ export default function ForgottenPassword() {
 
     return <div className="d-flex flex-column" style={{ height: "100vh", overflowX: "hidden" }}>
             <div className="container-fluid bg-dark text-white p-2 d-flex justify-content-around">
-                <h2>Logo</h2>
                 <div className="d-inline-flex">
-                    <button type="button" className="btn btn-link text-light" style={{fontWeight: "bolder", fontSize: "1.2rem"}}>Course</button>
                     <button type="button" className="btn btn-link text-light" style={{fontWeight: "bolder", fontSize: "1.2rem"}} onClick={onLoginClick}>Login</button>
                     <button type="button" className="btn btn-info" style={{fontWeight: "bolder", fontSize: "1.2rem"}} onClick={onRegisterClick}>Sign up</button>
                 </div>

@@ -5,7 +5,8 @@ import { useNavigate } from "react-router-dom";
 export default function Header() {
     const navigate = useNavigate();
     const [userName, setUserName] = useState(() => {
-        const username = JSON.parse(localStorage['userName']);
+        const storedUserName = localStorage.getItem('userName');
+        const username = storedUserName ? JSON.parse(storedUserName) : '';
         if(username) return username;
         return '';
     });

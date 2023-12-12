@@ -105,10 +105,10 @@ export default function Listening() {
 
     return <div className="col-10">
         <div className="row gx-1">
-            <div className="col-5">
+            <div className="col-7">
                 {badgeName.map((value, index) => <button className={`btn btn${selectedIndex !== index ? "-outline" : ""}-info m-2 py-1 px-3`} onClick={() => handleChangeBadge(index)} style={{ fontSize: "1.25rem", borderRadius: 30 }}>{value}</button>)}
             </div>
-            <div className="col-2"></div>
+            {/* <div className="col-2"></div> */}
             <div className="col-2 p-2"></div>
             <div className="col-3 p-2">
                 <input type="text" className="form-inline" placeholder="🔍 Search" value={input} onChange={(e) => {onInputChange(e)}}></input>
