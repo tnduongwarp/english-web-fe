@@ -14,6 +14,7 @@ import VocabularyLesson from './uis/learning-word/vocabulary-lesson';
 
 
 import { useState } from 'react';
+import DashboardForAdmin from './uis/admin/Dashboard';
 
   function App(){
     const [categoryId, setCategoryId] = useState(null);
@@ -31,7 +32,7 @@ import { useState } from 'react';
             ]
           },
           { path: "/category", element: <Category setCategoryid={setCategoryId}/> },
-          
+          { path: "/admin/*", element: <DashboardForAdmin></DashboardForAdmin>},
           { path:"*", element: <Navigate to="/login" />}
           
         ]);

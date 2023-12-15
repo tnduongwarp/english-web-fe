@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import GoogleLogin from "react-google-login";
 import { gapi } from 'gapi-script';
 import Api from "../../services/auth-api";
-import Footer from "../Footer";
 export default function Login() {
     const [hasErr,setHasErr] = useState(false);
     const [loginData, setLoginData] = useState(
@@ -29,7 +28,9 @@ export default function Login() {
             });
             localStorage['userId'] = JSON.stringify(res.user.id);
             localStorage['userName'] = JSON.stringify(res.user.username);
-            navigate("/category");
+            localStorage['role'] = JSON.stringify(res.user.role);
+            if(res.user.role === 'user') navigate("/category");
+            else if(res.user.role === 'admin') navigate("/admin")
         }else{
             setHasErr(true)
         }
@@ -51,8 +52,13 @@ export default function Login() {
             console.log(token);
             if (token["access-token"] !== undefined
                 && token["refresh-token"] !== undefined
-                && token["expired-at"] !== undefined)
-                navigate("/category");
+                && token["expired-at"] !== undefined){
+                    let role = JSON.parse(window.localStorage["role"]);
+                    if(role === 'user')
+                        navigate("/category");
+                    else if(role === 'admin') navigate("/admin")
+                }
+                
         }
     }, [navigate]);
 
@@ -77,7 +83,9 @@ export default function Login() {
                 })
                 localStorage['userId'] = JSON.stringify(res.user.id);
                 localStorage['userName'] = JSON.stringify(res.user.username);
-                navigate("/category");
+                localStorage['role'] = JSON.stringify(res.user.role);
+                if(res.user.role === 'user') navigate("/category");
+                else if(res.user.role === 'admin') navigate("/admin")
             }else{
                 setHasErr(true)
             }
