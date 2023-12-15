@@ -21,6 +21,12 @@ class Api{
     getLessonById(lessonId){
         return api.get('/lesson/'+ lessonId);
     }
+    getAllUser(){
+        return api.get('/user/')
+    }
+    deleteUserById(id){
+        return api.post('/user/delete/'+id)
+    }
 }
 // eslint-disable-next-line import/no-anonymous-default-export
 export default new Api();

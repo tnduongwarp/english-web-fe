@@ -8,7 +8,7 @@ import {
     UserOutlined,
   } from '@ant-design/icons';
 import { Layout, Menu, theme } from 'antd';
-import UserManagement from './UserManager';
+import UserManagement from './user-mng/UserManager';
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children,onClick) {
     return {
