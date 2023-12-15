@@ -42,7 +42,7 @@ export default function DashboardForAdmin(){
         }}
       >
         <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-          <div className="demo-logo-vertical" style={{marginBottom:"20px"}}>
+          <div className="demo-logo-vertical" style={{marginBottom:"20px", overflow:"hidden"}}>
             <img src={process.env.PUBLIC_URL + 'logo.png'} style={{ height:"50px", width:"200px"}}/>
           </div>
           <Menu theme="dark"  mode="inline" items={items} />
