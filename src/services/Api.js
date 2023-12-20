@@ -27,6 +27,12 @@ class Api{
     deleteUserById(id){
         return api.post('/user/delete/'+id)
     }
+    getListLessonForAdmin(courseId, categoryId){
+        return api.post('/lesson/list-lesson-for-admin',{courseId,categoryId})
+    }
+    addListeningLesson(categoryId,title,content,url){
+        return api.post('/lesson/add-listening',{categoryId,title,content,url})
+    }
 }
 // eslint-disable-next-line import/no-anonymous-default-export
 export default new Api();

@@ -1,4 +1,5 @@
 import axios from "axios";
+
 const instance = axios.create({
     baseURL: "http://localhost:3000/",
     headers: {
@@ -47,6 +48,11 @@ const instance = axios.create({
             return Promise.reject(_error);
           }
         }
+      }
+      if(err.response.status === 405){
+        localStorage.clear();
+        sessionStorage.clear();
+        return;
       }
   
       return Promise.reject(err);

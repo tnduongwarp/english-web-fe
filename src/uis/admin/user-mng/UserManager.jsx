@@ -136,7 +136,7 @@ export default function UserManagement(){
                 <div className='search'>
                     <div>
                       <input style={{padding: '3px'}} type="text" placeholder='Search user...' value={key} onChange={(e) => setKey(e.target.value)}/>
-                      <Button type="primary" icon={<SearchOutlined />}  onClick={onclickButton}>
+                      <Button type="primary" icon={<SearchOutlined />}  onClick={onclickButton} className='button-user-mng'>
                           Search
                       </Button>
                     </div>

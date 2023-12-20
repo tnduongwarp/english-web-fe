@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import {  Route, Routes, useNavigate  } from "react-router-dom";
 import {
     DesktopOutlined,
@@ -6,9 +6,13 @@ import {
     PieChartOutlined,
     TeamOutlined,
     UserOutlined,
+    PlusSquareOutlined,
+    UnorderedListOutlined
   } from '@ant-design/icons';
 import { Layout, Menu, theme } from 'antd';
 import UserManagement from './user-mng/UserManager';
+import ListLesson from './lesson-bank/list-lesson';
+import AddListening from './add-lesson/listening/add';
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children,onClick) {
     return {
@@ -27,12 +31,20 @@ export default function DashboardForAdmin(){
         token: { colorBgContainer, borderRadiusLG },
     } = theme.useToken();
     const navigate = useNavigate();
+    useEffect(() => {
+      if (window.localStorage["token"] === undefined) navigate("/login");
+      let token = JSON.parse(window.localStorage["token"]);
+      if (token["access-token"] === undefined
+          || token["refresh-token"] === undefined
+          || token["expired-at"] === undefined) navigate("/login");
+  }, [navigate]);
     const items = [
         getItem('User Management', '1', <TeamOutlined />, null, () => navigate('/admin/user-management')),
-        getItem('User', 'sub1', <UserOutlined />, [
-            getItem('Tom', '3'),
-            getItem('Bill', '4'),
-            getItem('Alex', '5'),
+        getItem('Lesson Bank', '2', <UnorderedListOutlined />, null, () => navigate('/admin/lesson-bank')),
+        getItem('Add Lesson', 'sub1', <PlusSquareOutlined />, [
+            getItem('Listening', '3', null, null,() => navigate('/admin/add-listening')),
+            getItem('Reading', '4'),
+            getItem('Vocabulary', '5'),
         ]),
     ];
     return (
@@ -69,7 +81,8 @@ export default function DashboardForAdmin(){
             >
                 <Routes>
                     <Route path="/user-management" element={<UserManagement/>} />
-                    
+                    <Route path="/lesson-bank" element={<ListLesson/>} />
+                    <Route path="/add-listening" element={<AddListening/>} />
                 </Routes>
             </div>
           </Content>
