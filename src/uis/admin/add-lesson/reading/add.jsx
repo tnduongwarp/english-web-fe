@@ -12,7 +12,7 @@ export default function AddReading(){
     const [title, setTitle] = useState('');
     const [paragraph, setParagraph] = useState('');
     const [form2] = Form.useForm();
-    const [questions, setQuestions] = useState([{ content: '', A: '', B: '', C: '', D: '' }]);
+    const [questions, setQuestions] = useState([{ content: '', A: '', B: '', C: '', D: '', answer: '' }]);
     useEffect(() => {
         setLoading(true)
         Api.getAllCategory().then(res => {
@@ -23,8 +23,17 @@ export default function AddReading(){
     const setValue = (value,setValueFunc) => {
         setValueFunc(value);
     }
+    // const checkValidQuestion = () => {
+    //     const questionsInput = form2.getFieldsValue().questions;
+    //     if(questionsInput.length === 0) return false;
+    //     for(let i = 0; i< questionsInput.length; i++){
+    //         if(!questionsInput[i].content || !questionsInput[i].A ||!questionsInput[i].B || !questionsInput[i].C || !questionsInput[i].D || !questionsInput[i].answer ) return false
+    //     }
+    //     console.log('here')
+    //     return true;
+    // }
     const canSave = () => {
-        if(categoryId && title.length && paragraph.length && !loading) return true;
+        if(categoryId && title.length && paragraph.length && !loading  ) return true;
         else return false;
     }
     const saveLesson = () => {
@@ -50,7 +59,7 @@ export default function AddReading(){
                     setTitle('');
                     setParagraph('');
                     form2.resetFields();
-                    setQuestions([{ content: '', A: '', B: '', C: '', D: '' }])
+                    // setQuestions([{ content: '', A: '', B: '', C: '', D: '' }])
                 }
             })
             .catch(err => console.log(err))
@@ -157,6 +166,7 @@ export default function AddReading(){
             </Form.Item>
           </>
         )}
+        
       </Form.List>
         <Form.Item wrapperCol={{ offset: 20, span: 24 }} >
             <Button type="primary" icon = {<SaveOutlined />} disabled = {!canSave()} onClick={saveLesson} loading={loading}>
@@ -170,3 +180,4 @@ export default function AddReading(){
         </>
     )
 }
+//setQuestions([...questions,{ content: '', A: '', B: '', C: '', D: '' }])
