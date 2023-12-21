@@ -33,6 +33,12 @@ class Api{
     addListeningLesson(categoryId,title,content,url){
         return api.post('/lesson/add-listening',{categoryId,title,content,url})
     }
+    addReadingLesson(categoryId,title,content){
+        return api.post('/lesson/add-reading',{categoryId,title,content})
+    }
+    addQuiz(questions, lessonId){
+        return api.post('/quiz/add-quiz',{questions,lessonId})
+    }
 }
 // eslint-disable-next-line import/no-anonymous-default-export
 export default new Api();

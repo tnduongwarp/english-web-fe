@@ -13,6 +13,7 @@ import { Layout, Menu, theme } from 'antd';
 import UserManagement from './user-mng/UserManager';
 import ListLesson from './lesson-bank/list-lesson';
 import AddListening from './add-lesson/listening/add';
+import AddReading from './add-lesson/reading/add';
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children,onClick) {
     return {
@@ -43,7 +44,7 @@ export default function DashboardForAdmin(){
         getItem('Lesson Bank', '2', <UnorderedListOutlined />, null, () => navigate('/admin/lesson-bank')),
         getItem('Add Lesson', 'sub1', <PlusSquareOutlined />, [
             getItem('Listening', '3', null, null,() => navigate('/admin/add-listening')),
-            getItem('Reading', '4'),
+            getItem('Reading', '4', null, null,() => navigate('/admin/add-reading')),
             getItem('Vocabulary', '5'),
         ]),
     ];
@@ -83,6 +84,7 @@ export default function DashboardForAdmin(){
                     <Route path="/user-management" element={<UserManagement/>} />
                     <Route path="/lesson-bank" element={<ListLesson/>} />
                     <Route path="/add-listening" element={<AddListening/>} />
+                    <Route path="/add-reading" element={<AddReading/>} />
                 </Routes>
             </div>
           </Content>
