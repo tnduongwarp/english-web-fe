@@ -104,8 +104,8 @@ export default function ListLesson(){
             <div>
                 <div className='search'>
                     <div>
-                      <input style={{padding: '3px'}} type="text" placeholder='Search user...' value={key} onChange={(e) => setKey(e.target.value)}/>
-                      <Button type="primary" icon={<SearchOutlined />}  onClick={onclickButton}>
+                      <input style={{padding: '3px'}} type="text" placeholder='Search...' value={key} onChange={(e) => setKey(e.target.value)}/>
+                      <Button type="primary" icon={<SearchOutlined />}  onClick={onclickButton} style={{marginLeft:'10px'}}>
                           Search
                       </Button>
                     </div>
@@ -131,7 +131,7 @@ export default function ListLesson(){
                         { value: 3, label: 'Listening'},
                       ]}
                     />
-                     <Button type="primary" icon={<SearchOutlined />}  onClick={onClickShow}>
+                     <Button type="primary" icon={<SearchOutlined />}  onClick={onClickShow} style={{marginLeft:'10px'}}>
                           Show
                       </Button>
                     </div>

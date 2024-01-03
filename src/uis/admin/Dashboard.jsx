@@ -1,19 +1,18 @@
 import { useState,useEffect } from 'react';
 import {  Route, Routes, useNavigate  } from "react-router-dom";
 import {
-    DesktopOutlined,
-    FileOutlined,
-    PieChartOutlined,
     TeamOutlined,
-    UserOutlined,
     PlusSquareOutlined,
-    UnorderedListOutlined
+    UnorderedListOutlined,
+    FolderOpenOutlined
   } from '@ant-design/icons';
 import { Layout, Menu, theme } from 'antd';
 import UserManagement from './user-mng/UserManager';
 import ListLesson from './lesson-bank/list-lesson';
 import AddListening from './add-lesson/listening/add';
 import AddReading from './add-lesson/reading/add';
+import AddVocabulary from './add-lesson/vocabulary/add';
+import LanguageManagement from './language-manage/manage-language';
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children,onClick) {
     return {
@@ -40,12 +39,13 @@ export default function DashboardForAdmin(){
           || token["expired-at"] === undefined) navigate("/login");
   }, [navigate]);
     const items = [
+        getItem('Language Management','6',<FolderOpenOutlined />,null, () => navigate('/admin/language-management')),
         getItem('User Management', '1', <TeamOutlined />, null, () => navigate('/admin/user-management')),
         getItem('Lesson Bank', '2', <UnorderedListOutlined />, null, () => navigate('/admin/lesson-bank')),
         getItem('Add Lesson', 'sub1', <PlusSquareOutlined />, [
             getItem('Listening', '3', null, null,() => navigate('/admin/add-listening')),
             getItem('Reading', '4', null, null,() => navigate('/admin/add-reading')),
-            getItem('Vocabulary', '5'),
+            getItem('Vocabulary', '5', null, null,() => navigate('/admin/add-vocabulary')),
         ]),
     ];
     return (
@@ -85,6 +85,8 @@ export default function DashboardForAdmin(){
                     <Route path="/lesson-bank" element={<ListLesson/>} />
                     <Route path="/add-listening" element={<AddListening/>} />
                     <Route path="/add-reading" element={<AddReading/>} />
+                    <Route path="/add-vocabulary" element={<AddVocabulary/>} />
+                    <Route path="/language-management" element={<LanguageManagement/>} />
                 </Routes>
             </div>
           </Content>

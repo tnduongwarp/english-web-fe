@@ -36,8 +36,14 @@ class Api{
     addReadingLesson(categoryId,title,content){
         return api.post('/lesson/add-reading',{categoryId,title,content})
     }
+    addVocabularyLesson(categoryId, title, content, words){
+        return api.post('/lesson/add-vocabulary',{categoryId, title, content, words});
+    }
     addQuiz(questions, lessonId){
         return api.post('/quiz/add-quiz',{questions,lessonId})
+    }
+    updateStatusLanguage(categoryId, status){
+        return api.post('/category/update-status',{categoryId, status})
     }
 }
 // eslint-disable-next-line import/no-anonymous-default-export
