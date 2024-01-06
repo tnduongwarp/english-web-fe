@@ -15,6 +15,9 @@ export default function AddListening(){
     const [url, setUrl] = useState('');
     const [visile, setVisible] = useState(false);
     useEffect(() => {
+      document.title = "Add Listening"
+    },[]);
+    useEffect(() => {
         setLoading(true)
         Api.getAllCategory().then(res => {
             setLanguages(res.data.data)

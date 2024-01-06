@@ -6,13 +6,15 @@ import {
     UnorderedListOutlined,
     FolderOpenOutlined
   } from '@ant-design/icons';
-import { Layout, Menu, theme } from 'antd';
+import { Layout, Menu, theme, Button } from 'antd';
 import UserManagement from './user-mng/UserManager';
 import ListLesson from './lesson-bank/list-lesson';
 import AddListening from './add-lesson/listening/add';
 import AddReading from './add-lesson/reading/add';
 import AddVocabulary from './add-lesson/vocabulary/add';
 import LanguageManagement from './language-manage/manage-language';
+import AuthApi from "../../services/auth-api";
+
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children,onClick) {
     return {
@@ -28,7 +30,7 @@ function getItem(label, key, icon, children,onClick) {
 export default function DashboardForAdmin(){
     const [collapsed, setCollapsed] = useState(false);
     const {
-        token: { colorBgContainer, borderRadiusLG },
+        token: {  colorBgContainer, borderRadiusLG },
     } = theme.useToken();
     const navigate = useNavigate();
     useEffect(() => {
@@ -48,6 +50,12 @@ export default function DashboardForAdmin(){
             getItem('Vocabulary', '5', null, null,() => navigate('/admin/add-vocabulary')),
         ]),
     ];
+    const handleLogout = async () => {
+      const refreshToken =JSON.parse(localStorage['token']);
+      await new AuthApi().logout(refreshToken['refresh-token']);
+      localStorage.removeItem("token");
+      navigate("/login");
+  }
     return (
         <Layout
         style={{
@@ -65,8 +73,12 @@ export default function DashboardForAdmin(){
             style={{
               padding: 0,
               background: colorBgContainer,
+              display:'flex',
+              justifyContent:'end'
             }}
-          />
+          >
+            <div style={{marginRight:'20px'}}><Button type='primary' onClick={handleLogout}>Log out</Button></div>
+          </Header>
           <Content
             style={{
               margin: '16px 16px',

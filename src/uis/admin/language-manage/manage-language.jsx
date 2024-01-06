@@ -5,6 +5,9 @@ export default function LanguageManagement(){
     const [loading, setLoading] = useState([false,false,false]);
     const [languages, setLanguages] = useState([]);
     useEffect(() => {
+        document.title = "Language"
+      },[]);
+    useEffect(() => {
         Api.getAllCategory().then(res => {
             setLanguages(res.data.data)
         })

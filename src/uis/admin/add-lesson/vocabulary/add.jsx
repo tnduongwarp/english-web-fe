@@ -16,6 +16,9 @@ export default function AddVocabulary(){
     const [word,setWord] = useState([{original:'', pronunciation:'', meaning:''}])
     const [form1] = Form.useForm();
     const [form2] = Form.useForm();
+    useEffect(() => {
+        document.title = "Add Vocabulary"
+      },[]);
     const nextSlide = () => {
         console.log(form1.getFieldsValue())
     carouselRef.current.next();

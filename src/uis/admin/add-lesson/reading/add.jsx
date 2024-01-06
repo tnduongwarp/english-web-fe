@@ -14,6 +14,9 @@ export default function AddReading(){
     const [form2] = Form.useForm();
     const [questions, setQuestions] = useState([{ content: '', A: '', B: '', C: '', D: '', answer: '' }]);
     useEffect(() => {
+      document.title = "Add Reading"
+    },[]);
+    useEffect(() => {
         setLoading(true)
         Api.getAllCategory().then(res => {
             setLanguages(res.data.data)

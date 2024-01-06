@@ -25,7 +25,7 @@ export default function ListReadingLesson(){
         navigate('/dashboard/reading/reading-lesson/');
     }
     return (
-        <div>
+        <div className='col-10'>
             <div className="user-process">
                 <div className='user-process-header'>Continue learning</div>
                 {

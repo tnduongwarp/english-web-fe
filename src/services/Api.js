@@ -45,6 +45,9 @@ class Api{
     updateStatusLanguage(categoryId, status){
         return api.post('/category/update-status',{categoryId, status})
     }
+    deleteLessonById(id){
+        return api.post('/lesson/delete/'+id);
+    }
 }
 // eslint-disable-next-line import/no-anonymous-default-export
 export default new Api();

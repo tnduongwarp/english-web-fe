@@ -10,6 +10,9 @@ export default function UserManagement(){
     const [data, setData] = useState([])
     const [filterData, setFilterData] = useState([]);
     const [key, setKey] = useState('');
+    useEffect(() => {
+      document.title = "User"
+    },[]);
     const confirm = (e,id) => {
         console.log(id);
         Api.deleteUserById(id).then(res => {

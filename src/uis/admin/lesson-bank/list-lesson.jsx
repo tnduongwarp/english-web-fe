@@ -11,7 +11,10 @@ export default function ListLesson(){
     const [key, setKey] = useState('');
     const [languages, setLanguages] = useState([]);
     const [categoryId,setCategoryId] = useState(null);
-    const [courseId,setCourseId] = useState(null)
+    const [courseId,setCourseId] = useState(null);
+    useEffect(() => {
+      document.title = "Lesson"
+    },[]);
     useEffect(() => {
         setLoading(true)
         Api.getAllCategory().then(res => {
@@ -51,7 +54,7 @@ export default function ListLesson(){
       ];
       const confirm = (e,id) => {
         console.log(id);
-        Api.deleteUserById(id).then(res => {
+        Api.deleteLessonById(id).then(res => {
             if(res.status ===200) {
                 let newdata = data.filter(item =>(item.key !== id));
                 console.log(newdata)

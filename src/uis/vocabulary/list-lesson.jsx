@@ -26,7 +26,7 @@ export default function ListLesson(){
         navigate('/dashboard/vocabulary/vocabulary-lesson/');
     }
     return (
-        <div>
+        <div className='col-10'>
             <div className="user-process">
                 <div className='user-process-header'>Continue learning</div>
                 {
